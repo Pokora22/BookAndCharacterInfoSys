@@ -17,21 +17,26 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         CustomArrayList<String> someStrings = new CustomArrayList<>();
-        someStrings.add("str1");
-        someStrings.add("str2");
-        someStrings.add("str3");
-        someStrings.add("str4");
-        someStrings.add("str5");
-        someStrings.add("str6");
-        someStrings.add("str7");
-        someStrings.add("str8");
-        someStrings.add("str9");
-        someStrings.add("str10");
-        someStrings.add("str11");
-        someStrings.add("str12");
-        someStrings.add("str13");
 
-        System.out.println(someStrings.toString());
+        for(int i = 0; i < 100; i++) {
+            someStrings.add("str1------------");
+            someStrings.add("str1------------");
+            someStrings.add("str3------------");
+            someStrings.add("str4------------");
+            someStrings.add("str5------------");
+            someStrings.add("str6------------");
+            someStrings.add("str7------------");
+            someStrings.add("str8------------");
+            someStrings.add("str9------------");
+            someStrings.add("str10-----------");
+            someStrings.add("str11-----------");
+            someStrings.add("str12-----------");
+            someStrings.add("str13-----------");
+            System.out.println("LF: " + someStrings.loadFactor());
+        }
+
+        System.out.println("List length: " + someStrings.size());
+        for(Node n : someStrings.getList()) System.out.println(n);
 
         launch(args);
     }

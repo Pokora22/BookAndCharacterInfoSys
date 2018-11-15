@@ -2,8 +2,8 @@ import java.util.Iterator;
 
 public class CustomArrayList <T> implements Iterable<T>{
     private static final int DEFAULT_SIZE = 10;
-    private double loadFactor;
     private Node<T>[] list;
+    private Node<T> head; //placeholder to get iterator first item for now
 
     CustomArrayList(int startSize){
         if(startSize<0)
@@ -30,25 +30,40 @@ public class CustomArrayList <T> implements Iterable<T>{
     }
 
     public void add(T item){
-        if (loadFactor > .7) expand();
+        if (loadFactor() > .7) expand();
 
         int index = hash(item)%list.length;
-        int pow = 2;
-        while(list[index] != null) {
-            index = ((int)Math.pow(index, pow++))%list.length;
+        for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
+            if (list[index] == null){
+                list[index] = new Node<>(item);
+                return;
+            }
+            index += i*i;
         }
 
         list[index] = new Node<>(item);
+        if(head == null) head = list[index];
+        else{
+            list[index].next = head;
+            head = list[index];
+        }
     }
 
     private int hash(T item){
-        return item.hashCode(); //TODO: Create custom hash function
+        return Math.abs(item.hashCode()); //TODO: Create custom hash function
     }
 
     private void expand(){
         Node<T>[] tempList = new Node[list.length*2];
-        for(int i = 0; i < list.length; i++){
-            tempList[i] = list[i];
+        for(T item : this){
+            int index = hash(item)%list.length;
+            for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
+                if (list[index] == null){
+                    list[index] = new Node<>(item);
+                    return;
+                }
+                index += i*i;
+            }
         }
         this.list = tempList;
     }
@@ -77,9 +92,17 @@ public class CustomArrayList <T> implements Iterable<T>{
         return list.length;
     }
 
+    public double loadFactor(){
+        int used = 0;
+        if(head != null){
+            for(T item : this) used++;
+        }
+        return (double)used/list.length;
+    }
+
     @Override
     public Iterator<T> iterator() {
-        return new CustomIterator<T>(list[0]);
+        return new CustomIterator<T>(head);
     }
 
     public String toString(){
@@ -89,5 +112,9 @@ public class CustomArrayList <T> implements Iterable<T>{
             toString.append(item.toString() + "\n");
         }
         return toString.toString();
+    }
+
+    public Node<T>[] getList() {
+        return list;
     }
 }

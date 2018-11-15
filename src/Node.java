@@ -20,4 +20,8 @@ public class Node <T> {
     public void setContent(T content) {
         this.content = content;
     }
+
+    public String toString(){
+        return content.toString();
+    }
 }

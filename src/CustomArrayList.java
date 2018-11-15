@@ -29,7 +29,7 @@ public class CustomArrayList <T> implements Iterable<T>{
         list[nextFreeIndex] = new Node<T>(item);
     }
 
-    public void add(T item){
+    public void add(T item){ //TODO: Doesn't expand
         if (loadFactor() > .7) expand();
 
         int index = hash(item)%list.length;
@@ -58,8 +58,8 @@ public class CustomArrayList <T> implements Iterable<T>{
         for(T item : this){
             int index = hash(item)%list.length;
             for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
-                if (list[index] == null){
-                    list[index] = new Node<>(item);
+                if (tempList[index] == null){
+                    tempList[index] = new Node<>(item);
                     return;
                 }
                 index = (index + i*i)%list.length;

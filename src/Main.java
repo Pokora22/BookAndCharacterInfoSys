@@ -19,6 +19,7 @@ public class Main extends Application {
         CustomArrayList<String> someStrings = new CustomArrayList<>();
 
         for(int i = 0; i < 100; i++) {
+            int filled = 0;
             someStrings.add("str1------------");
             someStrings.add("str1------------");
             someStrings.add("str3------------");
@@ -33,6 +34,10 @@ public class Main extends Application {
             someStrings.add("str12-----------");
             someStrings.add("str13-----------");
             System.out.println("LF: " + someStrings.loadFactor());
+            for(Node n : someStrings.getList()){
+                if (n != null) filled++;
+            }
+            System.out.println("Filled:" + filled);
         }
 
         System.out.println("List length: " + someStrings.size());

@@ -38,7 +38,7 @@ public class CustomArrayList <T> implements Iterable<T>{
                 list[index] = new Node<>(item);
                 return;
             }
-            index += i*i;
+            index = (index + i*i)%list.length;
         }
 
         list[index] = new Node<>(item);
@@ -62,7 +62,7 @@ public class CustomArrayList <T> implements Iterable<T>{
                     list[index] = new Node<>(item);
                     return;
                 }
-                index += i*i;
+                index = (index + i*i)%list.length;
             }
         }
         this.list = tempList;

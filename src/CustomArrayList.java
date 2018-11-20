@@ -36,7 +36,7 @@ public class CustomArrayList <T> implements Iterable<T>{
         for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
             if (list[index] == null){
                 list[index] = new Node<>(item);
-                return;
+                break;
             }
             index = (index + i*i)%list.length;
         }
@@ -53,19 +53,28 @@ public class CustomArrayList <T> implements Iterable<T>{
         return Math.abs(item.hashCode()); //TODO: Create custom hash function
     }
 
-    private void expand(){
+    private void expand(){ //TODO: Still doesn't rehash properly.
         Node<T>[] tempList = new Node[list.length*2];
         for(T item : this){
             int index = hash(item)%list.length;
             for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
                 if (tempList[index] == null){
                     tempList[index] = new Node<>(item);
-                    return;
+                    break;
                 }
                 index = (index + i*i)%list.length;
             }
         }
         this.list = tempList;
+    }
+
+    public T get(T item){
+        int index = hash(item)%list.length;
+        for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
+            if(list[index] != null && list[index].getContent() == item) return list[index].getContent();
+            index = (index + i*i)%list.length;
+        }
+        return head.getContent(); //TODO: What to return if fails?
     }
 
     public void clear(){

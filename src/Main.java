@@ -4,6 +4,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.Random;
+
 public class Main extends Application {
 
     @Override
@@ -16,9 +18,11 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        Random rndm = new Random();
+        /*
         CustomArrayList<String> someStrings = new CustomArrayList<>();
 
-        for(int i = 0; i < 100; i++) {
+        for(int i = 0; i < 10; i++) {
             int filled = 0;
             someStrings.add("str1------------");
             someStrings.add("str1------------");
@@ -42,7 +46,31 @@ public class Main extends Application {
 
         System.out.println("List length: " + someStrings.size());
         for(Node n : someStrings.getList()) System.out.println(n);
+        */
+
+        CustomArrayList<Integer> ints = new CustomArrayList<>();
+        ints.add(123456789);
+        for(int i = 0; i< 1000; i++){
+            ints.add(rndm.nextInt());
+        }
+
+        System.out.println("Expanding list: ");
+        for(Node n : ints.getList()) System.out.println(n);
+        System.out.println("ArrayList size:" + ints.size());
+        System.out.println("Inside list size: " + ints.getList().length);
+
+        System.out.println("Getting: " + ints.get(123456789));
+
+        CustomArrayList<Integer> intsBig = new CustomArrayList<>(ints.size());
+        for(Integer i : ints){
+            intsBig.add(i);
+        }
+
+        System.out.println("Big List: ");
+        for(Node n : intsBig.getList()) System.out.println(n);
+
 
         launch(args);
     }
+
 }

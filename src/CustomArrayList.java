@@ -22,6 +22,8 @@ public class CustomArrayList <T> implements Iterable<T>{
         this.loadFactorLimit = loadFactorLimit;
     }
 
+
+
     public void add(T item){
         if (loadFactor() > loadFactorLimit) expand();
 
@@ -43,7 +45,7 @@ public class CustomArrayList <T> implements Iterable<T>{
     }
 
     private int hash(T item){
-        return Math.abs(item.hashCode()); //TODO: Create custom hash function
+        return Math.abs(item.hashCode());
     }
 
     private void expand(){
@@ -75,20 +77,6 @@ public class CustomArrayList <T> implements Iterable<T>{
         /*for(Object o : this){
             o = null;
         }*/
-    }
-
-    public Node getNode(int index){ //TODO: Change to use hash instead (or remove)
-        if (index >=0 && index < list.length)
-            return list[index];
-        else
-            throw new IndexOutOfBoundsException("No element with such index");
-    }
-
-    public void setNode(int index, T item){
-        if (index >=0 && index < list.length)
-            list[index] = new Node<T>(item);
-        else
-            throw new IndexOutOfBoundsException("No element with such index");
     }
 
     public int size() {

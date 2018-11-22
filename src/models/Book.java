@@ -116,4 +116,21 @@ public class Book {
     public void setImage(String image) {
         if(!image.isEmpty()) this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", countryOfSetting='" + countryOfSetting + '\'' +
+                ", countryOfOrigin='" + countryOfOrigin + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publicationYear=" + publicationYear +
+                ", numberOfChapters=" + numberOfChapters +
+                ", numberOfPages=" + numberOfPages +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
 }

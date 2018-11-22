@@ -1,3 +1,5 @@
+package models;
+
 public class Book {
     private String title;
     private String author;
@@ -21,12 +23,10 @@ public class Book {
         this.countryOfOrigin = !countryOfOrigin.isEmpty() ? countryOfOrigin : "NOT GIVEN";
         this.publisher = !publisher.isEmpty() ? publisher : "NOT GIVEN";
         this.publicationYear = publicationYear<0 ? this.publicationYear = 0 : publicationYear;
-        if(numberOfChapters < 0) this.numberOfChapters = 0;
-        else this.numberOfChapters = numberOfChapters;
-        if(numberOfPages<0) this.numberOfPages = 0;
-        else this.numberOfPages = numberOfPages;
-        this.description = description;
-        this.image = image;
+        this.numberOfChapters = numberOfChapters<0 ? this.numberOfChapters = 0 : numberOfChapters;
+        this.numberOfPages = numberOfPages<0 ? this.numberOfPages = 0 : numberOfPages;
+        this.description = !description.isEmpty() ? description : "NOT GIVEN";
+        this.image = !image.isEmpty() ? image : "NOT GIVEN";
     }
 
     public String getTitle() {

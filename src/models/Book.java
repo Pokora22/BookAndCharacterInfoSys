@@ -1,7 +1,5 @@
 package models;
 
-import java.util.Objects;
-
 public class Book {
     private String title;
     private String author;
@@ -36,7 +34,7 @@ public class Book {
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        if(!title.isEmpty()) this.title = title;
     }
 
     public String getAuthor() {
@@ -44,7 +42,7 @@ public class Book {
     }
 
     public void setAuthor(String author) {
-        this.author = author;
+        if(!author.isEmpty()) this.author = author;
     }
 
     public String getGenre() {
@@ -52,23 +50,23 @@ public class Book {
     }
 
     public void setGenre(String genre) {
-        this.genre = genre;
+        if(!genre.isEmpty()) this.genre = genre;
     }
 
     public String getCountryOfSetting() {
         return countryOfSetting;
     }
 
-    public void setCountryOfSetting(String countryOfSetting) {
-        this.countryOfSetting = countryOfSetting;
+    public void setCountryOfSetting(String countryOfSetting) { //plot setting
+        if(!countryOfSetting.isEmpty()) this.countryOfSetting = countryOfSetting;
     }
 
     public String getCountryOfOrigin() {
         return countryOfOrigin;
     }
 
-    public void setCountryOfOrigin(String countryOfOrigin) {
-        this.countryOfOrigin = countryOfOrigin;
+    public void setCountryOfOrigin(String countryOfOrigin) { //where is the author from
+        if(!countryOfOrigin.isEmpty()) this.countryOfOrigin = countryOfOrigin;
     }
 
     public String getPublisher() {
@@ -76,7 +74,7 @@ public class Book {
     }
 
     public void setPublisher(String publisher) {
-        this.publisher = publisher;
+        if(!publisher.isEmpty()) this.publisher = publisher;
     }
 
     public int getPublicationYear() {
@@ -117,6 +115,23 @@ public class Book {
 
     public void setImage(String image) {
         if(!image.isEmpty()) this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", countryOfSetting='" + countryOfSetting + '\'' +
+                ", countryOfOrigin='" + countryOfOrigin + '\'' +
+                ", publisher='" + publisher + '\'' +
+                ", publicationYear=" + publicationYear +
+                ", numberOfChapters=" + numberOfChapters +
+                ", numberOfPages=" + numberOfPages +
+                ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
+                '}';
     }
 
     @Override

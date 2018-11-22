@@ -9,12 +9,13 @@ public class CustomIterator<T> implements Iterator {
 
     @Override
     public boolean hasNext() {
-        return currPos.next != null;
+        return currPos != null;
     }
 
     @Override
     public T next() {
+        Node<T> temp = currPos;
         currPos = currPos.next;
-        return currPos.getContent();
+        return temp.getContent();
     }
 }

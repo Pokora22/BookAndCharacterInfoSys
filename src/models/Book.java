@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Objects;
+
 public class Book {
     private String title;
     private String author;
@@ -115,5 +117,28 @@ public class Book {
 
     public void setImage(String image) {
         if(!image.isEmpty()) this.image = image;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return getPublicationYear() == book.getPublicationYear() &&
+                getNumberOfChapters() == book.getNumberOfChapters() &&
+                getNumberOfPages() == book.getNumberOfPages() &&
+                Objects.equals(getTitle(), book.getTitle()) &&
+                Objects.equals(getAuthor(), book.getAuthor()) &&
+                Objects.equals(getGenre(), book.getGenre()) &&
+                Objects.equals(getCountryOfSetting(), book.getCountryOfSetting()) &&
+                Objects.equals(getCountryOfOrigin(), book.getCountryOfOrigin()) &&
+                Objects.equals(getPublisher(), book.getPublisher()) &&
+                Objects.equals(getDescription(), book.getDescription()) &&
+                Objects.equals(getImage(), book.getImage());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTitle(), getAuthor(), getGenre(), getCountryOfSetting(), getCountryOfOrigin(), getPublisher(), getPublicationYear(), getNumberOfChapters(), getNumberOfPages(), getDescription(), getImage());
     }
 }

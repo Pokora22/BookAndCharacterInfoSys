@@ -22,19 +22,6 @@ public class CustomArrayList <T> implements Iterable<T>{
         this.loadFactorLimit = loadFactorLimit;
     }
 
-    public void append(T item){
-        for(int i = 0; i < list.length; i++){
-            if(list[i]==null){
-                list[i] = new Node<T>(item);
-                return;
-            }
-        }
-
-        int nextFreeIndex = list.length;
-        expand();
-        list[nextFreeIndex] = new Node<T>(item);
-    }
-
     public void add(T item){
         if (loadFactor() > loadFactorLimit) expand();
 
@@ -84,12 +71,13 @@ public class CustomArrayList <T> implements Iterable<T>{
     }
 
     public void clear(){
-        for(Object o : this){
+        head = null;
+        /*for(Object o : this){
             o = null;
-        }
+        }*/
     }
 
-    public Node getNode(int index){
+    public Node getNode(int index){ //TODO: Change to use hash instead (or remove)
         if (index >=0 && index < list.length)
             return list[index];
         else

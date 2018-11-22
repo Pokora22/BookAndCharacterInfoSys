@@ -1,3 +1,4 @@
+import java.util.AbstractList;
 import java.util.Iterator;
 
 public class CustomLinkedList<T> implements Iterable<T> {
@@ -7,7 +8,7 @@ public class CustomLinkedList<T> implements Iterable<T> {
 	private int length = 0;
 	
 	
-	public void insertElement(T obj) { //add element to the head
+	public void add(T obj) { //add element to the head
 		Node<T> j = new Node<>(obj);
 		j.setNext(head); //next item in the list is the head of..
 		head = j; //..this item
@@ -17,7 +18,7 @@ public class CustomLinkedList<T> implements Iterable<T> {
 		length++;
 	}
 	
-	public void insertLastElement(T obj) { //add element to the end
+	public void addLast(T obj) { //add element to the end
 		if(head!=null) {
 			Node<T> temp = head;
 			while(temp.getNext()!=null) {
@@ -29,10 +30,10 @@ public class CustomLinkedList<T> implements Iterable<T> {
 			tail = j; // this element is the new tail
 			length++;
 		}
-		else insertElement(obj);
+		else add(obj);
 	}
 	
-	public void insertElementWithin(T obj, int index) { //insert an element at a specific index, between two elements
+	public void addBetween(T obj, int index) { //TODO '''Working title''' insert an element at a specific index, between two elements
 		if(head!=null) {
 			if(index<length) {
 				Node<T> temp = head;
@@ -47,10 +48,12 @@ public class CustomLinkedList<T> implements Iterable<T> {
 			}
 			else {}
 		}
-		else insertElement(obj);
+		else add(obj);
 	}
-	
-	public void deleteElement(int index) { //remove at a specific index
+
+
+
+	public boolean remove(int index) { //remove at a specific index
 		if(head!=null) {
 			if(index<=length) {
 				Node<T> temp = head;
@@ -60,28 +63,32 @@ public class CustomLinkedList<T> implements Iterable<T> {
 				if(temp.getPrevious()==null) { //for a first that doesn't have a previous
 					if(temp.getNext()==null) { //if it's the only one in the list then clear it
 						clear();
+						return true;
 					}
 					else {
 						System.out.println(temp.getNext());
 						head = temp.getNext();
 						temp.getNext().setPrevious(null);
 						length--;
+						return true;
 					}
 				}
 				else if(temp.getNext()!=null) { //for non-first that has a next
 					temp.getPrevious().setNext(temp.getNext());
 					temp.getNext().setPrevious(temp.getPrevious());
 					length--;
+					return true;
 				}
 				else { //deleting the last one
 					tail = temp.getPrevious();
 					temp.getPrevious().setNext(null);
 					length--;
+					return true;
 				}
 			}
-			else {}
+			else return false;
 		}
-		else {}
+		else return false;
 	}
 	
 	public T getFirst() { //get the first element in the list
@@ -92,7 +99,8 @@ public class CustomLinkedList<T> implements Iterable<T> {
 		return tail.getContent();
 	}
 	
-	public T get(int index) throws Exception { //get the contents of an element
+	/*
+	public T get(int index) { //get the contents of an element
 		if(head!=null) {
 			if(index<=length) {
 				Node<T> temp = head;
@@ -103,10 +111,11 @@ public class CustomLinkedList<T> implements Iterable<T> {
 			}
 			else {throw new IndexOutOfBoundsException("Index out of bounds!");}
 		}
-		else {throw new Exception("No Content");}
+		else {}//TODO what else owo
 	}
+	*/
 	
-	public void set(T obj, int index) throws Exception { //updates the element at an index
+	public void set(T obj, int index) { //updates the element at an index
 		if(index<=length) {
 			Node<T> temp = head;
 			for(int i=0;i<index;i++) {
@@ -115,11 +124,11 @@ public class CustomLinkedList<T> implements Iterable<T> {
 			temp.setContent(obj);
 		}
 		else {
-			if(head==null)
-				throw new Exception("No content");
+			if(head==null) {} //TODO
+
 			
-			else 
-				throw new IndexOutOfBoundsException("Index needs to be between 0 and " + length);}
+			else {}//TODO
+		}
 		
 	}
 	
@@ -133,6 +142,7 @@ public class CustomLinkedList<T> implements Iterable<T> {
 		return length;
 	}
 
+	/*
 	public T next(T obj) {
 		if(head!=null) {
 			Node<T> temp = head;
@@ -143,9 +153,11 @@ public class CustomLinkedList<T> implements Iterable<T> {
 				temp = temp.getNext();
 			}
 		}
-		else {}
+		else {
 			return null;
+		}
 	}
+	*/
 
 	@Override
 	public Iterator<T> iterator() {

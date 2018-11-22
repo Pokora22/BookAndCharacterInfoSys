@@ -15,7 +15,7 @@ public class CustomIterator<T> implements Iterator {
     @Override
     public T next() {
         Node<T> temp = currPos;
-        currPos = currPos.next;
+        currPos = currPos.getNext();
         return temp.getContent();
     }
 }

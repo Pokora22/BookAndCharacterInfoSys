@@ -98,22 +98,21 @@ public class CustomLinkedList<T> implements Iterable<T> {
 	public T getLast() { //get the last element in the list
 		return tail.getContent();
 	}
-	
-	/*
+
 	public T get(int index) { //get the contents of an element
 		if(head!=null) {
-			if(index<=length) {
-				Node<T> temp = head;
-				for(int i=0;i<index;i++) {
-					temp = temp.getNext(); //iterating through the list until at the required index	
-				}
-				return temp.getContent();
-			}
-			else {throw new IndexOutOfBoundsException("Index out of bounds!");}
-		}
-		else {}//TODO what else owo
+            if (index <= length) {
+                Node<T> temp = head;
+                for (int i = 0; i < index; i++) {
+                    temp = temp.getNext(); //iterating through the list until at the required index
+                }
+                return temp.getContent();
+            } else {
+                throw new IndexOutOfBoundsException("Index out of bounds");
+            }
+        }
+        return null;
 	}
-	*/
 	
 	public void set(T obj, int index) { //updates the element at an index
 		if(index<=length) {
@@ -141,23 +140,6 @@ public class CustomLinkedList<T> implements Iterable<T> {
 	public int size() {
 		return length;
 	}
-
-	/*
-	public T next(T obj) {
-		if(head!=null) {
-			Node<T> temp = head;
-			for(int i=0;i<length-1;i++) {
-				if(temp.getContent() == obj) {
-					return temp.getNext().getContent();
-				}
-				temp = temp.getNext();
-			}
-		}
-		else {
-			return null;
-		}
-	}
-	*/
 
 	@Override
 	public Iterator<T> iterator() {

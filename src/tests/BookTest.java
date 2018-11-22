@@ -9,10 +9,10 @@ import org.junit.jupiter.api.Test;
 
 class BookTest {
 
-    Book test, testUnder;
+    private Book test, testUnder;
 
     @BeforeEach
-    void setUp() throws Exception {
+    void setUp() {
         test = new Book("Harry Potter and the Chamber of Secrets","J. K. Rowling", "Fantasy", 
         		"United Kingdom", "United Kingdom", "Bloomsbury", 1998, 18, 360, 
         		"On Harry Potter's twelfth birthday, the Dursley family—Harry's uncle Vernon, "

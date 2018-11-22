@@ -2,10 +2,11 @@ import java.util.Iterator;
 
 public class CustomArrayList <T> implements Iterable<T>{
     private static final int DEFAULT_SIZE = 10;
+    private double loadFactorLimit = .7;
     private Node<T>[] list;
     private Node<T> head; //placeholder to get iterator first item for now
 
-    CustomArrayList(int startSize){
+    CustomArrayList(int startSize){ //Starting size
         if(startSize<0)
             list = new Node[DEFAULT_SIZE];
         else
@@ -14,6 +15,11 @@ public class CustomArrayList <T> implements Iterable<T>{
 
     CustomArrayList(){
         list = new Node[DEFAULT_SIZE];
+    } //With item at head and default size(10)
+
+    CustomArrayList(double loadFactorLimit) {
+        list = new Node[DEFAULT_SIZE];
+        this.loadFactorLimit = loadFactorLimit;
     }
 
     public void append(T item){
@@ -29,8 +35,8 @@ public class CustomArrayList <T> implements Iterable<T>{
         list[nextFreeIndex] = new Node<T>(item);
     }
 
-    public void add(T item){ //TODO: Doesn't expand
-        if (loadFactor() > .7) expand();
+    public void add(T item){
+        if (loadFactor() > loadFactorLimit) expand();
 
         int index = hash(item)%list.length;
         for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
@@ -53,7 +59,7 @@ public class CustomArrayList <T> implements Iterable<T>{
         return Math.abs(item.hashCode()); //TODO: Create custom hash function
     }
 
-    private void expand(){ //TODO: Still doesn't rehash properly.
+    private void expand(){
         Node<T>[] tempList = new Node[list.length*2];
         for(T item : this){
             int index = hash(item)%tempList.length;
@@ -109,6 +115,10 @@ public class CustomArrayList <T> implements Iterable<T>{
         return (double)used/list.length;
     }
 
+    public void setLoadFactorLimit(double loadFactorLimit) {
+        if(loadFactorLimit > 0) this.loadFactorLimit = loadFactorLimit;
+    }
+
     @Override
     public Iterator<T> iterator() {
         return new CustomIterator<T>(head);
@@ -121,9 +131,5 @@ public class CustomArrayList <T> implements Iterable<T>{
             toString.append(item.toString() + "\n");
         }
         return toString.toString();
-    }
-
-    public Node<T>[] getList() {
-        return list;
     }
 }

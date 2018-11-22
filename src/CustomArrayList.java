@@ -56,13 +56,13 @@ public class CustomArrayList <T> implements Iterable<T>{
     private void expand(){ //TODO: Still doesn't rehash properly.
         Node<T>[] tempList = new Node[list.length*2];
         for(T item : this){
-            int index = hash(item)%list.length;
+            int index = hash(item)%tempList.length;
             for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
                 if (tempList[index] == null){
                     tempList[index] = new Node<>(item);
                     break;
                 }
-                index = (index + i*i)%list.length;
+                index = (index + i*i)%tempList.length;
             }
         }
         this.list = tempList;
@@ -71,7 +71,7 @@ public class CustomArrayList <T> implements Iterable<T>{
     public T get(T item){
         int index = hash(item)%list.length;
         for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
-            if(list[index] != null && list[index].getContent() == item) return list[index].getContent();
+            if(list[index] != null && list[index].getContent().equals(item)) return list[index].getContent();
             index = (index + i*i)%list.length;
         }
         return head.getContent(); //TODO: What to return if fails?

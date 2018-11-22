@@ -37,7 +37,7 @@ public class CustomArrayList <T> implements Iterable<T>{
         list[index] = new Node<>(item);
         if(head == null) head = list[index];
         else{
-            list[index].getNext() = head;
+            list[index].setNext(head);
             head = list[index];
         }
     }

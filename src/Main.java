@@ -5,8 +5,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import models.Book;
 
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends Application {
@@ -37,7 +35,7 @@ public class Main extends Application {
 
         books.add(myBook);
 
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 100; i++){
             books.add(new Book(randomString(10),
                     randomString(10),
                     randomString(10),

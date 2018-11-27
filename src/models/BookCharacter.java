@@ -8,14 +8,14 @@ public class BookCharacter {
     private double weight;
 
     public BookCharacter(String fname, String sname, String nickname, String gender, String description, int age, int height, double weight) {
-        this.fname = fname;
-        this.sname = sname;
-        this.nickname = nickname;
-        this.gender = gender;
-        this.description = description;
-        this.age = age;
-        this.height = height;
-        this.weight = weight;
+        this.fname = !fname.isEmpty() ? fname : "NOT GIVEN";
+        this.sname = !sname.isEmpty() ? sname : ""; //can be empty
+        this.nickname = !nickname.isEmpty() ? nickname : ""; //can be empty
+        this.gender = !gender.isEmpty() ? gender : "UNKNOWN"; //if none provided, will be unknown
+        this.description = !description.isEmpty() ? description : "This bio is empty..."; //bio defaults
+        this.age = age>=0 ? age : 0;
+        this.height = height>=0 ? height : 0;
+        this.weight = weight>=0 ? weight : 0;
     }
 
     public String getFname() {
@@ -23,7 +23,7 @@ public class BookCharacter {
     }
 
     public void setFname(String fname) {
-        this.fname = fname;
+        if(!fname.isEmpty()) this.fname = fname;
     }
 
     public String getSname() {
@@ -31,7 +31,7 @@ public class BookCharacter {
     }
 
     public void setSname(String sname) {
-        this.sname = sname;
+        this.sname = !sname.isEmpty() ? sname : "";
     }
 
     public String getNickname() {
@@ -39,7 +39,7 @@ public class BookCharacter {
     }
 
     public void setNickname(String nickname) {
-        this.nickname = nickname;
+        this.nickname = !nickname.isEmpty() ? nickname : "";
     }
 
     public String getGender() {
@@ -47,7 +47,7 @@ public class BookCharacter {
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.gender = !gender.isEmpty() ? gender : "UNKNOWN";
     }
 
     public String getDescription() {
@@ -55,7 +55,7 @@ public class BookCharacter {
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.description = !description.isEmpty() ? description : "This bio is empty...";
     }
 
     public int getAge() {
@@ -63,7 +63,7 @@ public class BookCharacter {
     }
 
     public void setAge(int age) {
-        this.age = age;
+        if(age>=0) this.age = age;
     }
 
     public int getHeight() {
@@ -71,7 +71,7 @@ public class BookCharacter {
     }
 
     public void setHeight(int height) {
-        this.height = height;
+        if(height>=0) this.height = height;
     }
 
     public double getWeight() {
@@ -79,7 +79,7 @@ public class BookCharacter {
     }
 
     public void setWeight(double weight) {
-        this.weight = weight;
+        if(weight>=0) this.weight = weight;
     }
 
     @Override

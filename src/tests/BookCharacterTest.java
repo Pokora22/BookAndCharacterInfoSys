@@ -29,7 +29,7 @@ class BookCharacterTest {
     @Test
     void setFname() {
         test.setFname("");
-        assertEquals("NOT GIVEN",test.getFname());
+        assertEquals("Sonic the Hedgehog",test.getFname());
         testUnder.setFname("Shadow the Hedgehog");
         assertEquals("Shadow the Hedgehog",testUnder.getFname());
     }

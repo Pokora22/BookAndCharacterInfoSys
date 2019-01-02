@@ -1,4 +1,4 @@
-import dataStructures.Node;
+package dataStructures;
 
 import java.util.Iterator;
 

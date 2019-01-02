@@ -1,3 +1,4 @@
+import dataStructures.CustomHashList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,7 +22,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        CustomArrayList<Book> books = new CustomArrayList<>();
+        CustomHashList<Book> books = new CustomHashList<>();
         Book myBook = new Book("My title",
                 randomString(10),
                 randomString(10),

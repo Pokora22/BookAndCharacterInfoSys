@@ -1,25 +1,25 @@
-import dataStructures.Node;
+package dataStructures;
 
 import java.util.Iterator;
 
-public class CustomArrayList <T> implements Iterable<T>{
+public class CustomHashList<T> implements Iterable<T>{
     private static final int DEFAULT_SIZE = 10;
     private double loadFactorLimit = .7;
     private Node<T>[] list;
     private Node<T> head; //placeholder to get iterator first item for now
 
-    CustomArrayList(int startSize){ //Starting size
+    CustomHashList(int startSize){ //Starting size
         if(startSize<0)
             list = new Node[DEFAULT_SIZE];
         else
             list = new Node[startSize];
     }
 
-    CustomArrayList(){
+    public CustomHashList(){
         list = new Node[DEFAULT_SIZE];
     } //With item at head and default size(10)
 
-    CustomArrayList(double loadFactorLimit) {
+    CustomHashList(double loadFactorLimit) {
         list = new Node[DEFAULT_SIZE];
         this.loadFactorLimit = loadFactorLimit;
     }
@@ -71,7 +71,7 @@ public class CustomArrayList <T> implements Iterable<T>{
             if(list[index] != null && list[index].getContent().equals(item)) return list[index].getContent();
             index = (index + i*i)%list.length;
         }
-        return head.getContent(); //TODO: What to return if fails?
+        return head.getContent(); //TODO: What to return if fails? / Create head in each list to be an empty 'Such a thing does not exist in database' instance
     }
 
     public void clear(){

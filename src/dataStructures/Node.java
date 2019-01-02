@@ -7,6 +7,7 @@ public class Node <T> {
     public Node(T item){
         this.content = item;
         this.next = null;
+        this.previous = null;
     }
 
     public Node(T item, Node next){

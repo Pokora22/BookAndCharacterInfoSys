@@ -32,20 +32,24 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
 
         int index = hash(item)%list.length;
         for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
-            if (list[index] == null){
-                list[index] = new Node<>(item);
-                break;
-            }
+            if (list[index] == null)break; //found empty spot
+
             index = (index + i*i)%list.length;
         }
 
         list[index] = new Node<>(item);
-        if(head == null) head = list[index];
+        if(head == null){
+            head = list[index];
+            head.setNext(null);
+            head.setPrevious(null);
+        }
         else{
             list[index].setNext(head);
+            head.setPrevious(list[index]);
             head = list[index];
+            head.setPrevious(null);
         }
-        return false;
+        return true;
     }
 
     public boolean addAll(AbstractCollection<T> collection){
@@ -59,7 +63,13 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         if (item == null) return false;
         int index = hash((T)item)%list.length;
         for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++) {
+            if(list[index] == null) return false;
             if(list[index].getContent().equals(item)){
+                Node<T> prevNode, nextNode; //Hold the references temporarily - otherwise would come up null after overwriting first one.
+                prevNode = list[index].getPrevious();
+                nextNode = list[index].getNext();
+                if(nextNode != null) nextNode.setPrevious(prevNode);
+                if(prevNode != null) prevNode.setNext(nextNode);
                 list[index] = null;
                 return true;
             }
@@ -78,18 +88,9 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     }
 
     private void expand(){
-        Node<T>[] tempList = new Node[list.length*2];
-        for(T item : this){
-            int index = hash(item)%tempList.length;
-            for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
-                if (tempList[index] == null){
-                    tempList[index] = new Node<>(item);
-                    break;
-                }
-                index = (index + i*i)%tempList.length;
-            }
-        }
-        this.list = tempList;
+        CustomHashList<T> expandedList = new CustomHashList<>(size()*2);
+        expandedList.addAll(this);
+        this.list = expandedList.getList();
     }
 
     public T get(T item){
@@ -136,5 +137,13 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
             toString.append(item.toString() + "\n");
         }
         return toString.toString();
+    }
+
+    public Node<T> getHead() {
+        return head;
+    }
+
+    public Node<T>[] getList() {
+        return list;
     }
 }

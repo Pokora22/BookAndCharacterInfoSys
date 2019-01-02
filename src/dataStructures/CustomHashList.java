@@ -1,8 +1,10 @@
 package dataStructures;
 
+import java.util.AbstractCollection;
+import java.util.AbstractList;
 import java.util.Iterator;
 
-public class CustomHashList<T> implements Iterable<T>{
+public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     private static final int DEFAULT_SIZE = 10;
     private double loadFactorLimit = .7;
     private Node<T>[] list;
@@ -25,8 +27,7 @@ public class CustomHashList<T> implements Iterable<T>{
     }
 
 
-
-    public void add(T item){
+    public boolean add(T item){
         if (loadFactor() > loadFactorLimit) expand();
 
         int index = hash(item)%list.length;
@@ -44,6 +45,32 @@ public class CustomHashList<T> implements Iterable<T>{
             list[index].setNext(head);
             head = list[index];
         }
+        return false;
+    }
+
+    public boolean addAll(AbstractCollection<T> collection){
+        for(T elem : collection){
+            this.add(elem);
+        }
+        return true;
+    }
+
+    public boolean remove(Object item){
+        if (item == null) return false;
+        int index = hash((T)item)%list.length;
+        for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++) {
+            if(list[index].getContent().equals(item)){
+                list[index] = null;
+                return true;
+            }
+            index = (index + i*i)%list.length;
+        }
+        return false;
+    }
+
+    @Override
+    public T get(int index) {
+        return list[index].getContent();
     }
 
     private int hash(T item){

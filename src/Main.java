@@ -22,7 +22,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        CustomHashList<Book> books = new CustomHashList<>();
+        CustomHashList<Book> books = new CustomHashList<>(120);
         Book myBook = new Book("My title",
                 randomString(10),
                 randomString(10),
@@ -63,12 +63,14 @@ public class Main extends Application {
 
         System.out.println("Books list size: " + books.size());
         System.out.println("Amount of books in: " + booksTotal);
-        System.out.println("Getting: " + books.get(myBook).getTitle());
+        String myBookTitle = books.get(myBook) == null? "Book missing" : books.get(myBook).getTitle();
+        System.out.println("Getting: " + myBookTitle);
 
         if(books.remove(myBook)) System.out.println("Book removed");
         if(books.remove(myBook)) System.out.println("Book removed");
         else System.out.println("No such book");
-        System.out.println("My book is now: " + books.get(myBook).getTitle());
+        myBookTitle = books.get(myBook) == null? "Book missing" : books.get(myBook).getTitle();
+        System.out.println("My book is now: " + myBookTitle);
         System.out.println("Head of books is: " + books.getHead().getContent().getTitle());
 
         booksTotal = 0;

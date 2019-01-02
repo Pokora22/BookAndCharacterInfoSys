@@ -10,7 +10,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     private Node<T>[] list;
     private Node<T> head; //placeholder to get iterator first item for now
 
-    CustomHashList(int startSize){ //Starting size
+    public CustomHashList(int startSize){ //Starting size
         if(startSize<0)
             list = new Node[DEFAULT_SIZE];
         else
@@ -28,15 +28,9 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
 
 
     public boolean add(T item){
-        if (loadFactor() > loadFactorLimit) expand();
+        if (loadFactor() == 1) return false;
 
-        int index = hash(item)%list.length;
-        for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
-            if (list[index] == null)break; //found empty spot
-
-            index = (index + i*i)%list.length;
-        }
-
+        int index = findEmptyIndex(item);
         list[index] = new Node<>(item);
         if(head == null){
             head = list[index];
@@ -59,48 +53,67 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         return true;
     }
 
-    public boolean remove(Object item){
-        if (item == null) return false;
-        int index = hash((T)item)%list.length;
-        for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++) {
-            if(list[index] == null) return false;
-            if(list[index].getContent().equals(item)){
-                Node<T> prevNode, nextNode; //Hold the references temporarily - otherwise would come up null after overwriting first one.
-                prevNode = list[index].getPrevious();
-                nextNode = list[index].getNext();
-                if(nextNode != null) nextNode.setPrevious(prevNode);
-                if(prevNode != null) prevNode.setNext(nextNode);
-                list[index] = null;
-                return true;
+    public int findEmptyIndex(Object item){
+        if(loadFactor() <= .7){
+            int index = Math.abs(item.hashCode())%list.length;
+            for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
+                if (list[index] == null)break; //found empty spot
+
+                index = (index + i*i)%list.length;
             }
-            index = (index + i*i)%list.length;
+            return index;
         }
-        return false;
+
+        for(int i = 0; i < list.length; i++)
+            if(list[i] == null) return i;
+        return -1; //safe cause checked before in loadfactor?
+    }
+
+    private int getIndex(Object item){
+        if(loadFactor()<= 0.7) {
+            int index = Math.abs(item.hashCode())%list.length;
+            for (int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++) {
+                if (list[index] != null && list[index].equals(item)) return index;
+
+                index = (index + i * i) % list.length;
+            }
+        }
+
+        for(int i = 0; i < list.length; i++) {
+            if (list[i] != null)
+                if(list[i].getContent().equals(item)) return i;
+        }
+
+        return -1;
+    }
+
+    public boolean remove(Object item) {
+        int index = getIndex(item);
+        if (index < 0) return false;
+
+        Node<T> prevNode, nextNode; //Hold the references temporarily - otherwise would come up null after overwriting first one.
+        prevNode = list[index].getPrevious();
+        nextNode = list[index].getNext();
+        if (nextNode != null) nextNode.setPrevious(prevNode);
+        if (prevNode != null) prevNode.setNext(nextNode);
+        list[index] = null;
+        return true;
     }
 
     @Override
     public T get(int index) {
-        return list[index].getContent();
+        return list[index] == null? list[index].getContent() : null;
     }
 
-    private int hash(T item){
-        return Math.abs(item.hashCode());
-    }
-
-    private void expand(){
+    private void expand(){ //Stuff breaks because of order added? Different head etc. Would need to replace this whole instance somehow
         CustomHashList<T> expandedList = new CustomHashList<>(size()*2);
         expandedList.addAll(this);
-        this.clear();
         this.list = expandedList.getList();
     }
 
     public T get(T item){
-        int index = hash(item)%list.length;
-        for(int i = 1; i < Math.sqrt(Integer.MAX_VALUE); i++){// could probably do with smaller limit
-            if(list[index] != null && list[index].getContent().equals(item)) return list[index].getContent();
-            index = (index + i*i)%list.length;
-        }
-        return head.getContent(); //TODO: What to return if fails? / Create head in each list to be an empty 'Such a thing does not exist in database' instance
+        int index = getIndex(item);
+        return (index < 0) ? null : list[index].getContent(); //TODO: What to return if fails?
     }
 
     public void clear(){

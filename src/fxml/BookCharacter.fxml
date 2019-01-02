@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Copyright (c) 2017, Gluon and/or its affiliates.
+    All rights reserved. Use is subject to license terms.
+
+    This file is available and licensed under the following license:
+
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions
+    are met:
+
+   - Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+   - Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in
+     the documentation and/or other materials provided with the distribution.
+   - Neither the name of Oracle Corporation and Gluon nor the names of its
+     contributors may be used to endorse or promote products derived
+     from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BookCharacterController">
+   <right>
+      <VBox prefHeight="400.0" prefWidth="330.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="29.0" prefWidth="306.0">
+               <children>
+                  <TextField fx:id="searchField" prefHeight="28.0" prefWidth="264.0" style="-fx-border-color: #000; -fx-background-color: #fff;" />
+                  <Button layoutX="264.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchBooks" prefHeight="30.0" prefWidth="66.0" text="Search" />
+               </children>
+            </Pane>
+            <Pane prefHeight="243.0" prefWidth="294.0">
+               <children>
+                  <ListView fx:id="bookCharacters" layoutY="3.0" prefHeight="241.0" prefWidth="330.0" />
+               </children>
+            </Pane>
+            <Pane prefHeight="135.0" prefWidth="306.0">
+               <children>
+                  <Button layoutX="38.0" layoutY="25.0" mnemonicParsing="false" onAction="#addBook" text="Add" />
+                  <Button layoutX="38.0" layoutY="85.0" mnemonicParsing="false" onAction="#delete" text="Delete" />
+                  <Button layoutX="126.0" layoutY="85.0" mnemonicParsing="false" onAction="#view" text="View" />
+                  <Button layoutX="219.0" layoutY="85.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </right>
+   <left>
+      <Pane prefHeight="400.0" prefWidth="270.0" BorderPane.alignment="CENTER">
+         <children>
+            <TextField fx:id="fName" alignment="CENTER" cache="true" layoutX="78.0" layoutY="10.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Text layoutX="5.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+            <Text layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname" wrappingWidth="55.466148376464844" />
+            <TextField fx:id="sName" alignment="CENTER" cache="true" layoutX="78.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <TextField fx:id="nickname" alignment="CENTER" cache="true" layoutX="78.0" layoutY="92.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Text layoutX="8.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nickname" />
+            <Text layoutX="16.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gender" />
+            <TextField fx:id="age" alignment="CENTER" cache="true" layoutX="79.0" layoutY="174.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Text layoutX="10.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Age" textAlignment="CENTER" wrappingWidth="54.35026550292969" />
+            <TextField fx:id="height" alignment="CENTER" cache="true" layoutX="78.0" layoutY="211.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Text layoutX="18.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Height" />
+            <TextField fx:id="weight" alignment="CENTER" cache="true" layoutX="76.0" layoutY="257.0" prefHeight="26.0" prefWidth="169.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </TextField>
+            <Text layoutX="3.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Weight" textAlignment="CENTER" wrappingWidth="68.16798400878906" />
+            <Line endX="270.0" endY="400.0000305175781" startX="270.0" startY="5.7220458984375E-6" strokeWidth="2.0" />
+            <Button layoutX="46.0" layoutY="346.0" mnemonicParsing="false" onAction="#applyChangesToBookCharacter" text="Apply" />
+            <Button layoutX="155.0" layoutY="346.0" mnemonicParsing="false" text="Button" />
+            <ChoiceBox fx:id="genderSelection" layoutX="80.0" layoutY="129.0" prefHeight="28.0" prefWidth="165.0" />
+         </children>
+      </Pane>
+   </left>
+</BorderPane>

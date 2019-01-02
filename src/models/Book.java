@@ -13,8 +13,6 @@ public class Book {
     private int publicationYear;
     private int numberOfChapters;
     private int numberOfPages;
-    private String description;
-    private String image;
     private CustomHashList<BookCharacter> bookCharacters;
 
     public Book(String title, String author, String genre, String countryOfSetting, String countryOfOrigin,
@@ -29,8 +27,6 @@ public class Book {
         this.publicationYear = publicationYear<0 ? this.publicationYear = 0 : publicationYear;
         this.numberOfChapters = numberOfChapters<0 ? this.numberOfChapters = 0 : numberOfChapters;
         this.numberOfPages = numberOfPages<0 ? this.numberOfPages = 0 : numberOfPages;
-        this.description = !description.isEmpty() ? description : "NOT GIVEN";
-        this.image = !image.isEmpty() ? image : "NOT GIVEN";
         bookCharacters = new CustomHashList<>();
     }
 
@@ -106,22 +102,6 @@ public class Book {
         if(numberOfPages > 0) this.numberOfPages = numberOfPages;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        if(!description.isEmpty()) this.description = description;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        if(!image.isEmpty()) this.image = image;
-    }
-
     public CustomHashList<BookCharacter> getBookCharacters() {
         return bookCharacters;
     }
@@ -142,8 +122,6 @@ public class Book {
                 ", publicationYear=" + publicationYear +
                 ", numberOfChapters=" + numberOfChapters +
                 ", numberOfPages=" + numberOfPages +
-                ", description='" + description + '\'' +
-                ", image='" + image + '\'' +
                 '}';
     }
 
@@ -160,14 +138,11 @@ public class Book {
                 Objects.equals(getGenre(), book.getGenre()) &&
                 Objects.equals(getCountryOfSetting(), book.getCountryOfSetting()) &&
                 Objects.equals(getCountryOfOrigin(), book.getCountryOfOrigin()) &&
-                Objects.equals(getPublisher(), book.getPublisher()) &&
-                Objects.equals(getDescription(), book.getDescription()) &&
-                Objects.equals(getImage(), book.getImage()) &&
-                Objects.equals(getBookCharacters(),book.getBookCharacters());
+                Objects.equals(getPublisher(), book.getPublisher());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getAuthor(), getGenre(), getCountryOfSetting(), getCountryOfOrigin(), getPublisher(), getPublicationYear(), getNumberOfChapters(), getNumberOfPages(), getDescription(), getImage());
+        return Objects.hash(getTitle(), getAuthor(), getGenre(), getCountryOfSetting(), getCountryOfOrigin(), getPublisher(), getPublicationYear(), getNumberOfChapters(), getNumberOfPages());
     }
 }

@@ -163,43 +163,4 @@ class BookTest {
         testUnder.setNumberOfPages(-1234);
         assertEquals(0,testUnder.getNumberOfPages());
     }
-
-    @Test
-    void getDescription() {
-    	assertEquals("On Harry Potter's twelfth birthday, the Dursley family—Harry's uncle Vernon, "
-        		+ "aunt Petunia, and cousin Dudley—hold a dinner party for a potential client "
-        		+ "of Vernon's drill-manufacturing company. Harry is not invited, but is content "
-        		+ "to spend the evening quietly in his bedroom, although he is confused why his "
-        		+ "school friends have not sent cards or presents. However, when he goes to his room, "
-        		+ "a house-elf named Dobby warns him not to return to Hogwarts and admits to intercepting "
-        		+ "Harry's post from his friends. Having failed to persuade Harry to voluntarily give up "
-        		+ "his place at Hogwarts, Dobby then attempts to get him expelled by using magic to smash "
-        		+ "Petunia's dessert on a dinner party guest and framing it on Harry, who is not allowed "
-        		+ "to use magic out of school. Uncle Vernon's business deal falls through, but Harry is "
-        		+ "given a second chance from the Ministry of Magic, and allowed to return at the start "
-        		+ "of the school year.", test.getDescription());
-    	assertEquals("NOT GIVEN", testUnder.getDescription());
-    }
-
-    @Test
-    void setDescription() {
-    	test.setDescription("aaa");
-    	assertEquals("aaa",test.getDescription());
-    	testUnder.setDescription("");
-        assertEquals("NOT GIVEN", testUnder.getDescription());
-    }
-
-    @Test
-    void getImage() {
-    	assertEquals("https://en.wikipedia.org/wiki/Harry_Potter_and_the_Chamber_of_Secrets#/media/File:Harry_Potter_and_the_Chamber_of_Secrets.jpg",test.getImage());
-        assertEquals("NOT GIVEN", testUnder.getImage());
-    }
-
-    @Test
-    void setImage() {
-    	test.setImage("sampleImage.png");
-    	assertEquals("sampleImage.png",test.getImage());
-    	testUnder.setImage("");
-        assertEquals("NOT GIVEN", testUnder.getImage());
-    }
 }

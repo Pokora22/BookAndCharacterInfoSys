@@ -1,4 +1,5 @@
-import java.util.AbstractList;
+import dataStructures.Node;
+
 import java.util.Iterator;
 
 public class CustomLinkedList<T> implements Iterable<T> {

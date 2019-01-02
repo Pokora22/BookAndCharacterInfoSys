@@ -1,3 +1,5 @@
+package dataStructures;
+
 public class Node <T> {
     private T content;
     private Node next, previous;

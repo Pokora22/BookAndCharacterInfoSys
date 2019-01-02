@@ -5,7 +5,7 @@ import dataStructures.CustomHashList;
 import java.util.Objects;
 
 public class BookCharacter {
-    private String fname, sname, nickname, gender, description;
+    private String fname, sname, nickname, gender;
     private int age, height;//TODO Bday
     private double weight;
     private CustomHashList<Book> books;
@@ -15,7 +15,6 @@ public class BookCharacter {
         this.sname = !sname.isEmpty() ? sname : ""; //can be empty
         this.nickname = !nickname.isEmpty() ? nickname : ""; //can be empty
         this.gender = !gender.isEmpty() ? gender : "UNKNOWN"; //if none provided, will be unknown
-        this.description = !description.isEmpty() ? description : "This bio is empty..."; //bio defaults
         this.age = age>=0 ? age : 0;
         this.height = height>=0 ? height : 0;
         this.weight = weight>=0 ? weight : 0;
@@ -52,14 +51,6 @@ public class BookCharacter {
 
     public void setGender(String gender) {
         this.gender = !gender.isEmpty() ? gender : "UNKNOWN";
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = !description.isEmpty() ? description : "This bio is empty...";
     }
 
     public int getAge() {
@@ -106,12 +97,11 @@ public class BookCharacter {
                 getSname().equals(that.getSname()) &&
                 getNickname().equals(that.getNickname()) &&
                 getGender().equals(that.getGender()) &&
-                getDescription().equals(that.getDescription()) &&
                 getBooks().equals(that.getBooks());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFname(), getSname(), getNickname(), getGender(), getDescription(), getAge(), getHeight(), getWeight());
+        return Objects.hash(getFname(), getSname(), getNickname(), getGender(), getAge(), getHeight(), getWeight());
     }
 }

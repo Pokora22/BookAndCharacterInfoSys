@@ -72,14 +72,14 @@
    <left>
       <Pane prefHeight="400.0" prefWidth="270.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="fname" alignment="CENTER" cache="true" layoutX="78.0" layoutY="10.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+            <TextField fx:id="fName" alignment="CENTER" cache="true" layoutX="78.0" layoutY="10.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </TextField>
             <Text layoutX="5.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-            <Text layoutX="4.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" wrappingWidth="67.46614837646484" />
-            <TextField fx:id="lname" alignment="CENTER" cache="true" layoutX="78.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
+            <Text layoutX="10.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Surname" wrappingWidth="55.466148376464844" />
+            <TextField fx:id="sName" alignment="CENTER" cache="true" layoutX="78.0" layoutY="53.0" prefHeight="26.0" prefWidth="167.0" style="-fx-border-color: #000; -fx-background-color: #fff;">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

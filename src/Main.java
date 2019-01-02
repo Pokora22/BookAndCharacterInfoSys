@@ -64,6 +64,31 @@ public class Main extends Application {
         System.out.println("Books list size: " + books.size());
         System.out.println("Amount of books in: " + booksTotal);
         System.out.println("Getting: " + books.get(myBook).getTitle());
+
+        if(books.remove(myBook)) System.out.println("Book removed");
+        if(books.remove(myBook)) System.out.println("Book removed");
+        else System.out.println("No such book");
+        System.out.println("My book is now: " + books.get(myBook).getTitle());
+        System.out.println("Head of books is: " + books.getHead().getContent().getTitle());
+
+        booksTotal = 0;
+        for (Book b: books){
+            booksTotal++;
+        }
+        System.out.println("Books list size: " + books.size());
+        System.out.println("Amount of books in: " + booksTotal);
+
+        /*
+        CustomHashList<Book> newBookList = new CustomHashList<>();
+        newBookList.addAll(books);
+        System.out.println("New list size: " + newBookList.size());
+        booksTotal = 0;
+        for (Book b:newBookList){
+            booksTotal++;
+        }
+        System.out.println("New list amount of books: " + booksTotal);
+        */
+
         launch(args);
     }
 

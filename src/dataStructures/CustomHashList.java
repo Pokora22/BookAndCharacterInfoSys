@@ -1,10 +1,7 @@
 package dataStructures;
 
 import javax.xml.stream.events.StartDocument;
-import java.util.AbstractCollection;
-import java.util.AbstractList;
-import java.util.Comparator;
-import java.util.Iterator;
+import java.util.*;
 
 public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     private static final int DEFAULT_SIZE = 10;
@@ -26,6 +23,11 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     CustomHashList(double loadFactorLimit) {
         list = new Node[DEFAULT_SIZE];
         this.loadFactorLimit = loadFactorLimit;
+    }
+
+    public CustomHashList(CustomHashList<T> sourceCollection){
+        list = new Node[sourceCollection.size()];
+        addAll(sourceCollection);
     }
 
 
@@ -104,7 +106,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
 
     @Override
     public T get(int index) {
-        return list[index] == null? list[index].getContent() : null;
+        return list[index] != null? list[index].getContent() : null;
     }
 
     private void expand(){ //Stuff breaks because of order added? Different head etc. Would need to replace this whole instance somehow
@@ -125,15 +127,15 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         }*/
     }
 
-    public <T> void quickSort(CustomHashList<T> list, int begin, int end, Comparator<T> comparator) {
+    public void quickSort(int begin, int end, Comparator<T> comparator) {
         int left = begin;
         int right = end;
         if(right>left) {
-            T pivot = list.get(list.size()/2);
+            T pivot = get(size()/2);
 
             while (left <= right) {
-                while (left < end && comparator.compare(list.get(left), pivot) < 0) left++;
-                while (right > begin && comparator.compare(list.get(right), pivot) > 0) right--;
+                while (left < end && comparator.compare(get(left), pivot) < 0) left++;
+                while (right > begin && comparator.compare(get(right), pivot) > 0) right--;
 
                 if(left <= right)
                 {
@@ -141,8 +143,8 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
                     left++;
                     right--;
                 }
-                if(begin<right) quickSort(list, begin, right, comparator);
-                if(left<end) quickSort(list, left, end, comparator);
+                if(begin<right) quickSort(begin, right, comparator);
+                if(left<end) quickSort(left, end, comparator);
             }
         }
     }

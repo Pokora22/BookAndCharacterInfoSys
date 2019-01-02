@@ -1,5 +1,6 @@
 import dataStructures.CustomHashList;
 import javafx.application.Application;
+import javafx.css.Size;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -90,6 +91,33 @@ public class Main extends Application {
         }
         System.out.println("New list amount of books: " + booksTotal);
         */
+
+        CustomHashList<Book> booksToBeSorted = new CustomHashList<>(50);
+
+        for(int i = 0; i < 10; i++){
+            booksToBeSorted.add(new Book(randomString(10),
+                    randomString(10),
+                    randomString(10),
+                    randomString(10),
+                    randomString(10),
+                    randomString(10),
+                    rndm.nextInt(),
+                    rndm.nextInt(),
+                    i,
+                    randomString(10),
+                    randomString(10)));
+        }
+
+        CustomHashList<Book> sortedBooks = new CustomHashList<>(booksToBeSorted);
+        sortedBooks.quickSort(0, sortedBooks.size()-1, (a, b)->a.getNumberOfPages()-b.getNumberOfPages());
+
+        System.out.println("Unsorted");
+        for(Book book : booksToBeSorted) System.out.println(book);
+
+        System.out.println("\n-------------------------------\n\nSorted");
+        for(Book book : sortedBooks) System.out.println(book);
+
+
 
         launch(args);
     }

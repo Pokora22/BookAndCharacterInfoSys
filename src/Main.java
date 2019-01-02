@@ -3,6 +3,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import models.Book;
 
 import java.util.Random;
@@ -62,7 +63,6 @@ public class Main extends Application {
         System.out.println("Books list size: " + books.size());
         System.out.println("Amount of books in: " + booksTotal);
         System.out.println("Getting: " + books.get(myBook).getTitle());
-
         launch(args);
     }
 

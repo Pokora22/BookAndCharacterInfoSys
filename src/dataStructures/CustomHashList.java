@@ -90,6 +90,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     private void expand(){
         CustomHashList<T> expandedList = new CustomHashList<>(size()*2);
         expandedList.addAll(this);
+        this.clear();
         this.list = expandedList.getList();
     }
 

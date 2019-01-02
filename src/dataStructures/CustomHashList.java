@@ -1,7 +1,9 @@
 package dataStructures;
 
+import javax.xml.stream.events.StartDocument;
 import java.util.AbstractCollection;
 import java.util.AbstractList;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
@@ -123,8 +125,38 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         }*/
     }
 
+    public <T> void quickSort(CustomHashList<T> list, int begin, int end, Comparator<T> comparator) {
+        int left = begin;
+        int right = end;
+        if(right>left) {
+            T pivot = list.get(list.size()/2);
+
+            while (left <= right) {
+                while (left < end && comparator.compare(list.get(left), pivot) < 0) left++;
+                while (right > begin && comparator.compare(list.get(right), pivot) > 0) right--;
+
+                if(left <= right)
+                {
+                    swap(left, right);
+                    left++;
+                    right--;
+                }
+                if(begin<right) quickSort(list, begin, right, comparator);
+                if(left<end) quickSort(list, left, end, comparator);
+            }
+        }
+    }
+
+    private void swap(int left, int right) {
+        Node temp = list[left];
+        list[left] = list[right];
+        list[right] = temp;
+    }
+
     public int size() {
-        return list.length;
+        int size = 0;
+        for(T e: this) size++;
+        return size;
     }
 
     public double loadFactor(){

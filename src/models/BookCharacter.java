@@ -1,11 +1,14 @@
 package models;
 
+import dataStructures.CustomHashList;
+
 import java.util.Objects;
 
 public class BookCharacter {
     private String fname, sname, nickname, gender, description;
     private int age, height;//TODO Bday
     private double weight;
+    private CustomHashList<Book> books;
 
     public BookCharacter(String fname, String sname, String nickname, String gender, String description, int age, int height, double weight) {
         this.fname = !fname.isEmpty() ? fname : "NOT GIVEN";
@@ -16,6 +19,7 @@ public class BookCharacter {
         this.age = age>=0 ? age : 0;
         this.height = height>=0 ? height : 0;
         this.weight = weight>=0 ? weight : 0;
+        books = new CustomHashList<>();
     }
 
     public String getFname() {
@@ -80,6 +84,30 @@ public class BookCharacter {
 
     public void setWeight(double weight) {
         if(weight>=0) this.weight = weight;
+    }
+
+    public CustomHashList<Book> getBooks() {
+        return books;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BookCharacter that = (BookCharacter) o;
+        return getAge() == that.getAge() &&
+                getHeight() == that.getHeight() &&
+                Double.compare(that.getWeight(), getWeight()) == 0 &&
+                getFname().equals(that.getFname()) &&
+                getSname().equals(that.getSname()) &&
+                getNickname().equals(that.getNickname()) &&
+                getGender().equals(that.getGender()) &&
+                getDescription().equals(that.getDescription()) &&
+                getBooks().equals(that.getBooks());
     }
 
     @Override

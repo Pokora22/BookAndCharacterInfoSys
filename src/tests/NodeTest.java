@@ -42,18 +42,20 @@ class NodeTest {
     }
 
     @Test
-    void getPrevious() {//not implemented
-        fail("not implemented");
+    void setPrevious() {
+        headNext.setPrevious(head);
+        assertEquals(head,headNext.getPrevious());
+    }
+
+    @Test
+    void getPrevious() {
+        headNext.setPrevious(head);
+        assertEquals(head,headNext.getPrevious());
     }
 
     @Test
     void setNext() {
         text.setNext(object);
         assertEquals(object,text.getNext());
-    }
-
-    @Test
-    void setPrevious() {//not implemented
-        fail("not implemented");
     }
 }

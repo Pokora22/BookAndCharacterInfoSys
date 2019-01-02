@@ -1,6 +1,7 @@
 package models;
 
 import java.util.Objects;
+import dataStructures.CustomHashList;
 
 public class Book {
     private String title;
@@ -14,6 +15,7 @@ public class Book {
     private int numberOfPages;
     private String description;
     private String image;
+    private CustomHashList<BookCharacter> bookCharacters;
 
     public Book(String title, String author, String genre, String countryOfSetting, String countryOfOrigin,
                 String publisher, int publicationYear, int numberOfChapters, int numberOfPages, String description,
@@ -29,6 +31,7 @@ public class Book {
         this.numberOfPages = numberOfPages<0 ? this.numberOfPages = 0 : numberOfPages;
         this.description = !description.isEmpty() ? description : "NOT GIVEN";
         this.image = !image.isEmpty() ? image : "NOT GIVEN";
+        bookCharacters = new CustomHashList<>();
     }
 
     public String getTitle() {
@@ -119,6 +122,14 @@ public class Book {
         if(!image.isEmpty()) this.image = image;
     }
 
+    public CustomHashList<BookCharacter> getBookCharacters() {
+        return bookCharacters;
+    }
+
+    public void addBookCharacter(BookCharacter character) {
+        bookCharacters.add(character);
+    }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -151,7 +162,8 @@ public class Book {
                 Objects.equals(getCountryOfOrigin(), book.getCountryOfOrigin()) &&
                 Objects.equals(getPublisher(), book.getPublisher()) &&
                 Objects.equals(getDescription(), book.getDescription()) &&
-                Objects.equals(getImage(), book.getImage());
+                Objects.equals(getImage(), book.getImage()) &&
+                Objects.equals(getBookCharacters(),book.getBookCharacters());
     }
 
     @Override

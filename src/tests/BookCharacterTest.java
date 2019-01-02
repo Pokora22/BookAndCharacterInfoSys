@@ -77,21 +77,6 @@ class BookCharacterTest {
     }
 
     @Test
-    void getDescription() {
-        assertEquals("Sonic is a blue anthropomorphic hedgehog who can run at supersonic speeds and " +
-                "curl into a ball, primarily to attack enemies", test.getDescription());
-        assertEquals("This bio is empty...", testUnder.getDescription());
-    }
-
-    @Test
-    void setDescription() {
-        test.setDescription("");
-        assertEquals("This bio is empty...", test.getDescription());
-        testUnder.setDescription("Shadow the Hedge Edge is an edgy hedgehog");
-        assertEquals("Shadow the Hedge Edge is an edgy hedgehog", testUnder.getDescription());
-    }
-
-    @Test
     void getAge() {
         assertEquals(15, test.getAge());
         assertEquals(0, testUnder.getAge());

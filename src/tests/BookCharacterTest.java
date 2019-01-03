@@ -14,10 +14,9 @@ class BookCharacterTest {
     @BeforeEach
     void setUp() {
         test = new BookCharacter("Sonic the Hedgehog","","","Male",
-                "Sonic is a blue anthropomorphic hedgehog who can run at supersonic speeds and " +
-                        "curl into a ball, primarily to attack enemies",15,100,35);
+                15,100,35);
 
-        testUnder = new BookCharacter("", "test1", "test2", "", "", -2, -121, -122.23);
+        testUnder = new BookCharacter("", "test1", "test2", "", -2, -121, -122.23);
     }
 
     @Test

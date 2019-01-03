@@ -1,6 +1,7 @@
 package controllers;
 
 import com.sun.tools.javac.Main;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.BorderPane;
@@ -14,10 +15,10 @@ public class BookListController extends Controller {
     private BorderPane window;
 
     @FXML
-    private void add() throws IOException {//creates an empty object and
+    private void add(ActionEvent actionEvent) throws IOException {//creates an empty object and
                             //prompts user to a new window to add parameters
 
-        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/Book.fxml")));
+        changeScene(actionEvent,"../fxml/Book.fxml");
     }
 
     @FXML
@@ -31,12 +32,6 @@ public class BookListController extends Controller {
 
     }
 
-//    @FXML
-//    private void goBack() { //go back to the previous window
-//        //MainController.sourceScene.
-//
-//
-//    }
     @FXML
     private void search() { //search for the item from the list
 

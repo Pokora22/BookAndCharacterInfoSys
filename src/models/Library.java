@@ -16,7 +16,7 @@ public class Library {
         characters = new CustomHashList<>();
         xStream = new XStream(new StaxDriver());
 
-        loadLibrary();
+        //loadLibrary();
     }
 
     public CustomHashList<Book> getBooks() {

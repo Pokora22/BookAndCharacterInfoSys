@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import models.Book;
 
+import java.util.Comparator;
 import java.util.Random;
 
 public class Main extends Application {
@@ -51,9 +52,6 @@ public class Main extends Application {
                     i,
                     randomString(10),
                     randomString(10)));
-//            int booksNow = 0;
-//            for(Book b : books) booksNow++;
-//            System.out.println("Books now: " + booksNow);
         }
 
 
@@ -75,21 +73,6 @@ public class Main extends Application {
         sortedBooks = CustomHashList.quickSort(new CustomHashList<Book>(books), 0, books.size()-1, (a, b)->a.getTitle().compareTo(b.getTitle()));
 
         for(Node n: sortedBooks) System.out.println(n.getContent());
-
-//        System.out.println("\nUnsorted");
-//        for(Book b : books) System.out.println(b);
-//
-//        System.out.println("\n-------------------------------\n\nSorted");
-//        for(Book b : sortedBooks) System.out.println(b);
-//
-//        System.out.println("\n\n@@@@@@@@@@@@@@@@@@@@ By title");
-//
-//        System.out.println("Sorted");
-//        for(Book b: CustomHashList.quickSort(books, 0, books.size()-1, (a, b)->a.getTitle().compareTo(b.getTitle()))){
-//            System.out.println(b);
-//        }
-//        System.out.println("---------------------------------------------------------\nUnsorted");
-//        for(Book b: books) System.out.println(b);
 
         launch(args);
     }

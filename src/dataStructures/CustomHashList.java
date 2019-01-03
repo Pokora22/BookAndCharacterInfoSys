@@ -195,7 +195,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
             if (arr[midIndex].getContent().equals(searchItem))
                 return arr[midIndex].getContent();
 
-            if (comparator.compare(arr[midIndex].getContent(), searchItem) < 0)
+            if (comparator.compare(searchItem, arr[midIndex].getContent()) < 0)
                 return binarySearch(arr, left, midIndex-1, searchItem, comparator);
 
             return binarySearch(arr, midIndex + 1, right, searchItem, comparator);

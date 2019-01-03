@@ -1,3 +1,5 @@
+package main;
+
 import dataStructures.CustomHashList;
 import dataStructures.CustomLinkedList;
 import dataStructures.Node;
@@ -17,7 +19,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../fxml/Main.fxml"));
         primaryStage.setTitle("Library Management");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);

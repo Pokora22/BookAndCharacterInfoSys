@@ -10,7 +10,7 @@ public class BookCharacter {
     private double weight;
     private CustomHashList<Book> books;
 
-    public BookCharacter(String fname, String sname, String nickname, String gender, String description, int age, int height, double weight) {
+    public BookCharacter(String fname, String sname, String nickname, String gender, int age, int height, double weight) {
         this.fname = !fname.isEmpty() ? fname : "NOT GIVEN";
         this.sname = !sname.isEmpty() ? sname : ""; //can be empty
         this.nickname = !nickname.isEmpty() ? nickname : ""; //can be empty

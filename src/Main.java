@@ -1,4 +1,5 @@
 import dataStructures.CustomHashList;
+import dataStructures.CustomLinkedList;
 import dataStructures.Node;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,9 +35,7 @@ public class Main extends Application {
                 randomString(10),
                 rndm.nextInt(),
                 rndm.nextInt(),
-                rndm.nextInt(),
-                randomString(10),
-                randomString(10));
+                rndm.nextInt());
 
         books.add(myBook);
 

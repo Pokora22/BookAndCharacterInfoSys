@@ -46,12 +46,5 @@ public class MainController extends Controller {
 
     }
 
-    private void changeScene(ActionEvent actionEvent, String fxmlLocation) throws IOException {
-        Stage sourceStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
-        Parent root = loader.load();
-        Controller controller = loader.getController();
-        controller.setSourceScene(sourceStage.getScene());
-        sourceStage.setScene(new Scene(root));
-    }
+
 }

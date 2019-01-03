@@ -16,8 +16,7 @@ public class Book {
     private CustomHashList<BookCharacter> bookCharacters;
 
     public Book(String title, String author, String genre, String countryOfSetting, String countryOfOrigin,
-                String publisher, int publicationYear, int numberOfChapters, int numberOfPages, String description,
-                String image) {
+                String publisher, int publicationYear, int numberOfChapters, int numberOfPages) {
         this.title = !title.isEmpty() ? title : "NOT GIVEN";
         this.author = !author.isEmpty() ? author : "NOT GIVEN";
         this.genre = !genre.isEmpty() ? genre : "NOT GIVEN";

@@ -109,7 +109,7 @@ public class Main extends Application {
         }
 
         CustomHashList<Book> sortedBooks = new CustomHashList<>(booksToBeSorted);
-        sortedBooks.quickSort(0, sortedBooks.size()-1, (a, b)->a.getNumberOfPages()-b.getNumberOfPages());
+        sortedBooks = CustomHashList.quickSort(booksToBeSorted, 0, sortedBooks.size()-1, (a, b)->a.getNumberOfPages()-b.getNumberOfPages());
 
         System.out.println("Unsorted");
         for(Book book : booksToBeSorted) System.out.println(book);

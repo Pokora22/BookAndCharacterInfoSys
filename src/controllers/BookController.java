@@ -2,7 +2,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 
-public class BookController {
+public class BookController extends Controller {
 
     @FXML
     private void searchCharacters() { //searches for characters associated to the book
@@ -25,11 +25,11 @@ public class BookController {
 
     }
 
-    @FXML
-    private void goBack() {         //goes back to the previous window
-
-
-    }
+//    @FXML
+//    private void goBack() {         //goes back to the previous window
+//
+//
+//    }
 
     @FXML
     private void applyChangesToBook(){  //apply changes to the edited book

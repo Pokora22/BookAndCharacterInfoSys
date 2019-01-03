@@ -1,4 +1,6 @@
 import dataStructures.CustomHashList;
+import dataStructures.CustomLinkedList;
+import dataStructures.Node;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,76 +53,44 @@ public class Main extends Application {
                     i,
                     randomString(10),
                     randomString(10)));
-            int booksNow = 0;
-            for(Book b : books) booksNow++;
-            System.out.println("Books now: " + booksNow);
+//            int booksNow = 0;
+//            for(Book b : books) booksNow++;
+//            System.out.println("Books now: " + booksNow);
         }
 
 
-        int booksTotal = 0;
-        for (Book b: books){
-            System.out.println(b.getNumberOfPages());
-            booksTotal++;
-        }
-
-        System.out.println("Books list size: " + books.size());
-        System.out.println("Amount of books in: " + booksTotal);
+        System.out.println("Books list size: " + books.getList().length);
+        System.out.println("Amount of books in: " + books.size());
         String myBookTitle = books.get(myBook) == null? "Book missing" : books.get(myBook).getTitle();
         System.out.println("Getting: " + myBookTitle);
-        Book myBookBinarySearched = books.binarySearch(0, books.size()-1, myBook, (a,b)->a.getTitle().compareTo(b.getTitle()));
-        String myBookBinarySearchTitle = myBookBinarySearched != null? "Book binary searched title: " + myBookBinarySearched.getTitle(): "Binary search returned empty";
+//        Book myBookBinarySearched = books.binarySearch(0, books.size()-1, myBook, (a,b)->a.getTitle().compareTo(b.getTitle()));
+//        String myBookBinarySearchTitle = myBookBinarySearched != null? "Book binary searched title: " + myBookBinarySearched.getTitle(): "Binary search returned empty";
+//        System.out.println(myBookBinarySearchTitle);
 
-        if(books.remove(myBook)) System.out.println("Book removed");
         if(books.remove(myBook)) System.out.println("Book removed");
         else System.out.println("No such book");
-        myBookTitle = books.get(myBook) == null? "Book missing" : books.get(myBook).getTitle();
-        System.out.println("My book is now: " + myBookTitle);
-        System.out.println("Head of books is: " + books.getHead().getContent().getTitle());
-
-        booksTotal = 0;
-        for (Book b: books){
-            booksTotal++;
-        }
-        System.out.println("Books list size: " + books.size());
-        System.out.println("Amount of books in: " + booksTotal);
-
-        /*
-        CustomHashList<Book> newBookList = new CustomHashList<>();
-        newBookList.addAll(books);
-        System.out.println("New list size: " + newBookList.size());
-        booksTotal = 0;
-        for (Book b:newBookList){
-            booksTotal++;
-        }
-        System.out.println("New list amount of books: " + booksTotal);
-        */
-
-        CustomHashList<Book> booksToBeSorted = new CustomHashList<>(50);
-
-        for(int i = 0; i < 10; i++){
-            booksToBeSorted.add(new Book(randomString(10),
-                    randomString(10),
-                    randomString(10),
-                    randomString(10),
-                    randomString(10),
-                    randomString(10),
-                    rndm.nextInt(),
-                    rndm.nextInt(),
-                    i,
-                    randomString(10),
-                    randomString(10)));
-        }
-
-        CustomHashList<Book> sortedBooks = new CustomHashList<>(booksToBeSorted);
-        sortedBooks = CustomHashList.quickSort(booksToBeSorted, 0, sortedBooks.size()-1, (a, b)->a.getNumberOfPages()-b.getNumberOfPages());
-
-        System.out.println("Unsorted");
-        for(Book book : booksToBeSorted) System.out.println(book);
-
-        System.out.println("\n-------------------------------\n\nSorted");
-        for(Book book : sortedBooks) System.out.println(book);
+        System.out.println("My book is now: " + books.get(myBook));
 
 
+        Node<Book>[] sortedBooks;
+//        sortedBooks = CustomHashList.quickSort(new CustomHashList<Book>(books), 0, books.size()-1, (a, b)->a.getTitle().compareTo(b.getTitle()));
+
+//        for(Node n: sortedBooks) System.out.println(n.getContent());
+
+//        System.out.println("\nUnsorted");
+//        for(Book b : books) System.out.println(b);
+//
+//        System.out.println("\n-------------------------------\n\nSorted");
+//        for(Book b : sortedBooks) System.out.println(b);
+//
+//        System.out.println("\n\n@@@@@@@@@@@@@@@@@@@@ By title");
+//
+//        System.out.println("Sorted");
+//        for(Book b: CustomHashList.quickSort(books, 0, books.size()-1, (a, b)->a.getTitle().compareTo(b.getTitle()))){
+//            System.out.println(b);
+//        }
+//        System.out.println("---------------------------------------------------------\nUnsorted");
+//        for(Book b: books) System.out.println(b);
 
         launch(args);
     }

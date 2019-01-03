@@ -6,7 +6,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
-public class BookCharacterController {
+public class BookCharacterController extends Controller {
 
     @FXML
     private BorderPane window;
@@ -32,10 +32,10 @@ public class BookCharacterController {
 
     }
 
-    @FXML
-    private void goBack() {     //goes back to the previous window
-
-    }
+//    @FXML
+//    private void goBack() {     //goes back to the previous window
+//
+//    }
 
     @FXML
     private void applyChangesToBookCharacter() { //apply changes to the edited character

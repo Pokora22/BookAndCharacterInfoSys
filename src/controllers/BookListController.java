@@ -8,7 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javax.swing.border.Border;
 import java.io.IOException;
 
-public class BookListController {
+public class BookListController extends Controller {
 
     @FXML
     private BorderPane window;
@@ -31,12 +31,12 @@ public class BookListController {
 
     }
 
-    @FXML
-    private void goBack() { //go back to the previous window
-        //MainController.sourceScene.
-
-
-    }
+//    @FXML
+//    private void goBack() { //go back to the previous window
+//        //MainController.sourceScene.
+//
+//
+//    }
     @FXML
     private void search() { //search for the item from the list
 

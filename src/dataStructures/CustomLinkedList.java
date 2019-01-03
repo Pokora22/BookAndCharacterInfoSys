@@ -1,15 +1,18 @@
 package dataStructures;
 
+import java.util.AbstractCollection;
+import java.util.AbstractList;
+import java.util.Collection;
 import java.util.Iterator;
 
-public class CustomLinkedList<T> implements Iterable<T> {
+public class CustomLinkedList<T> extends AbstractList<T> implements Iterable<T>{
 
 	private Node<T> head = null;
 	private Node<T> tail = null;
 	private int length = 0;
-	
-	
-	public void add(T obj) { //add element to the head
+
+	@Override
+	public boolean add(T obj) { //add element to the head
 		Node<T> j = new Node<>(obj);
 		j.setNext(head); //next item in the list is the head of..
 		head = j; //..this item
@@ -17,8 +20,14 @@ public class CustomLinkedList<T> implements Iterable<T> {
 		if(tail!=null) head.getNext().setPrevious(j);
 		else tail = j;
 		length++;
+		return true;
 	}
-	
+
+
+	public void addAll(AbstractCollection<T> collection){
+		for(T element : collection) add(element);
+	}
+
 	public void addLast(T obj) { //add element to the end
 		if(head!=null) {
 			Node<T> temp = head;
@@ -53,44 +62,44 @@ public class CustomLinkedList<T> implements Iterable<T> {
 	}
 
 
-
-	public boolean remove(int index) { //remove at a specific index
-		if(head!=null) {
-			if(index<=length) {
-				Node<T> temp = head;
-				for(int i=0;i<index;i++) {
-					temp = temp.getNext(); //iterating through the list until at the required index	
-				}
-				if(temp.getPrevious()==null) { //for a first that doesn't have a previous
-					if(temp.getNext()==null) { //if it's the only one in the list then clear it
-						clear();
-						return true;
-					}
-					else {
-						System.out.println(temp.getNext());
-						head = temp.getNext();
-						temp.getNext().setPrevious(null);
-						length--;
-						return true;
-					}
-				}
-				else if(temp.getNext()!=null) { //for non-first that has a next
-					temp.getPrevious().setNext(temp.getNext());
-					temp.getNext().setPrevious(temp.getPrevious());
-					length--;
-					return true;
-				}
-				else { //deleting the last one
-					tail = temp.getPrevious();
-					temp.getPrevious().setNext(null);
-					length--;
-					return true;
-				}
-			}
-			else return false;
-		}
-		else return false;
-	}
+//
+//	public boolean remove(int index) { //remove at a specific index
+//		if(head!=null) {
+//			if(index<=length) {
+//				Node<T> temp = head;
+//				for(int i=0;i<index;i++) {
+//					temp = temp.getNext(); //iterating through the list until at the required index
+//				}
+//				if(temp.getPrevious()==null) { //for a first that doesn't have a previous
+//					if(temp.getNext()==null) { //if it's the only one in the list then clear it
+//						clear();
+//						return true;
+//					}
+//					else {
+//						System.out.println(temp.getNext());
+//						head = temp.getNext();
+//						temp.getNext().setPrevious(null);
+//						length--;
+//						return true;
+//					}
+//				}
+//				else if(temp.getNext()!=null) { //for non-first that has a next
+//					temp.getPrevious().setNext(temp.getNext());
+//					temp.getNext().setPrevious(temp.getPrevious());
+//					length--;
+//					return true;
+//				}
+//				else { //deleting the last one
+//					tail = temp.getPrevious();
+//					temp.getPrevious().setNext(null);
+//					length--;
+//					return true;
+//				}
+//			}
+//			else return false;
+//		}
+//		else return false;
+//	}
 	
 	public T getFirst() { //get the first element in the list
 		return head.getContent();

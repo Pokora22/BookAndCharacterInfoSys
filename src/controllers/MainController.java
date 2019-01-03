@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class MainController {
+public class MainController extends Controller {
 
     @FXML
     private TextField searchField;
@@ -26,15 +26,17 @@ public class MainController {
     public Scene sourceScene;
 
     @FXML
-    private void openBooks() throws IOException { //opens the book list
-        setSourceScene(sourceScene);
-        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/BookList.fxml")));
+    private void openBooks(ActionEvent actionEvent) throws IOException { //opens the book list
+        changeScene(actionEvent, "../fxml/BookList.fxml");
+//        setSourceScene(sourceScene);
+//        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/BookList.fxml")));
     }
 
     @FXML
-    private void openCharacters() throws IOException { //opens the character list
-        setSourceScene(sourceScene);
-        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/BookCharacterList.fxml")));
+    private void openCharacters(ActionEvent actionEvent) throws IOException { //opens the character list
+        changeScene(actionEvent, "../fxml/BookCharacterList.fxml");
+//        setSourceScene(sourceScene);
+//        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/BookCharacterList.fxml")));
 
     }
 
@@ -44,15 +46,12 @@ public class MainController {
 
     }
 
-    public void setSourceScene(Scene sourceScene) {
-        if (sourceScene != null) {
-            this.sourceScene = sourceScene;
-        }
-        else{
-            Pane pane = new Pane();
-            Label labelGoofed = new Label("Done goofed. This should point to previous scene");
-            pane.getChildren().add(labelGoofed);
-            this.sourceScene = new Scene(pane);
-        }
+    private void changeScene(ActionEvent actionEvent, String fxmlLocation) throws IOException {
+        Stage sourceStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlLocation));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+        controller.setSourceScene(sourceStage.getScene());
+        sourceStage.setScene(new Scene(root));
     }
 }

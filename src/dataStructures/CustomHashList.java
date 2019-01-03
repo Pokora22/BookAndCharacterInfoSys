@@ -128,21 +128,40 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         }*/
     }
 
-    public static <T> CustomHashList<T> quickSort(CustomHashList<T> sourceList, int begin, int end, Comparator<T> comparator) {
-        CustomHashList<T> list = new CustomHashList<>(sourceList);
+    public Node<T>[] toArray(){
+        Node<T>[] arr = new Node[size()];
+
+        Node<T> itemToAdd = head;
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = itemToAdd;
+            itemToAdd = itemToAdd.getNext();
+        }
+
+        return arr;
+    }
+
+    public static <T> Node[] quickSort(CustomHashList<T> list, int begin, int end, Comparator<T> comparator) {
+
+//        if(list.size() < list.getList().length) list = new CustomHashList<>(list); //remove null elements by creating exact size hash list?
+        Node<T>[] arr = list.toArray();
+
         int left = begin;
         int right = end;
         if(right>left) {
-            T pivot = list.get(begin + (end - begin)/2);
-            if(pivot == null) return list; //if pivot is null, list is empty - return empty as it's sorted
+            T pivot = arr[begin + (end - begin)/2].getContent();
+            if(pivot == null) return null; //if pivot is null, list is empty
 
             while (left <= right) {
-                while (left < end && comparator.compare(list.get(left), pivot) < 0) left++;
-                while (right > begin && comparator.compare(list.get(right), pivot) > 0) right--;
+                while (left < end && comparator.compare(arr[left].getContent(), pivot) < 0) left++;
+                while (right > begin && comparator.compare(arr[right].getContent(), pivot) > 0) right--;
 
                 if(left <= right)
                 {
-                    list.swap(left, right);
+//                    list.swap(left, right);
+                    Node<T> temp = arr[left];
+                    arr[left] = arr[right];
+                    arr[right] = temp;
+
                     left++;
                     right--;
                 }
@@ -150,25 +169,26 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
                 if(left<end) quickSort(list, left, end, comparator);
             }
         }
-        return list;
+
+        return arr;
     }
 
-    private void swap(int left, int right) {
-        Node temp = list[left];
-        list[left] = list[right];
-        list[right] = temp;
-    }
+//    private void swap(int left, int right) {
+//        Node temp = list[left];
+//        list[left] = list[right];
+//        list[right] = temp;
+//    }
 
     public T binarySearch(int left, int right, T searchItem, Comparator<T> comparator)
     {
-        CustomHashList<T> list = quickSort(this, 0,size()-1,comparator);
+        Node<T>[] arr = quickSort(this, 0,size()-1,comparator);
         if (right >= left) {
             int midIndex = left + (right - left) / 2;
 
-            if (list.get(midIndex).equals(searchItem))
-                return list.get(midIndex);
+            if (arr[midIndex].getContent().equals(searchItem))
+                return arr[midIndex].getContent();
 
-            if (comparator.compare(list.get(midIndex), searchItem) < 0)
+            if (comparator.compare(arr[midIndex].getContent(), searchItem) < 0)
                 return binarySearch(left, midIndex-1, searchItem, comparator);
 
             return binarySearch(midIndex + 1, right, searchItem, comparator);

@@ -1,8 +1,15 @@
 package controllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.BorderPane;
+
+import java.io.IOException;
 
 public class BookCharacterController {
+
+    @FXML
+    private BorderPane window;
 
     @FXML
     private void searchBooks() { //searches for books associated to the character
@@ -10,9 +17,8 @@ public class BookCharacterController {
     }
 
     @FXML
-    private void addBook() {    //if character is not being edited:
-                                // -> opens book list to select a book to associate to a character
-
+    private void addBook() throws IOException {     //if character is not being edited:
+                                                    // -> opens book list to select a book to associate to a character
     }
 
     @FXML

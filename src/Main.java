@@ -18,7 +18,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("fxml/Main.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Library Management");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -48,9 +48,7 @@ public class Main extends Application {
                     randomString(10),
                     rndm.nextInt(),
                     rndm.nextInt(),
-                    i,
-                    randomString(10),
-                    randomString(10)));
+                    i));
         }
 
 

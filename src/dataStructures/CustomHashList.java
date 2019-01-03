@@ -1,5 +1,7 @@
 package dataStructures;
 
+import jdk.nashorn.api.tree.LiteralTree;
+
 import javax.xml.stream.events.StartDocument;
 import java.util.*;
 
@@ -127,26 +129,29 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         }*/
     }
 
-    public void quickSort(int begin, int end, Comparator<T> comparator) {
+    public static <T> CustomHashList<T> quickSort(CustomHashList<T> sourceList, int begin, int end, Comparator<T> comparator) {
+        CustomHashList<T> list = new CustomHashList<>(sourceList);
         int left = begin;
         int right = end;
         if(right>left) {
-            T pivot = get(size()/2);
+            T pivot = list.get(list.size()/2);
+            if(pivot == null) return list; //if pivot is null, list is empty - return empty as it's sorted
 
             while (left <= right) {
-                while (left < end && comparator.compare(get(left), pivot) < 0) left++;
-                while (right > begin && comparator.compare(get(right), pivot) > 0) right--;
+                while (left < end && comparator.compare(list.get(left), pivot) < 0) left++;
+                while (right > begin && comparator.compare(list.get(right), pivot) > 0) right--;
 
                 if(left <= right)
                 {
-                    swap(left, right);
+                    list.swap(left, right);
                     left++;
                     right--;
                 }
-                if(begin<right) quickSort(begin, right, comparator);
-                if(left<end) quickSort(left, end, comparator);
+                if(begin<right) quickSort(list, begin, right, comparator);
+                if(left<end) quickSort(list, left, end, comparator);
             }
         }
+        return list;
     }
 
     private void swap(int left, int right) {
@@ -154,6 +159,32 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         list[left] = list[right];
         list[right] = temp;
     }
+
+    /*
+    public T binarySearch(int left, int right, int searchItem, Comparator<T> comparator)
+    {
+        T[] arr = new CustomHashList<T>(this).quickSort(0,size()-1,comparator);
+        if (right >= left) {
+            int midIndex = left + (right - left) / 2;
+
+            if (arr[midIndex] == searchItem)
+                return midIndex;
+
+            // If element is smaller than mid, then
+            // it can only be present in left subarray
+            if (arr[midIndex] > searchItem)
+                return binarySearch(arr, left, midIndex - 1, searchItem);
+
+            // Else the element can only be present
+            // in right subarray
+            return binarySearch(arr, midIndex + 1, right, searchItem);
+        }
+
+        // We reach here when element is not present
+        // in array
+        return -1;
+    }
+    */
 
     public int size() {
         int size = 0;

@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 import models.Book;
 
+import java.util.Comparator;
 import java.util.Random;
 
 public class Main extends Application {
@@ -66,6 +67,8 @@ public class Main extends Application {
         System.out.println("Amount of books in: " + booksTotal);
         String myBookTitle = books.get(myBook) == null? "Book missing" : books.get(myBook).getTitle();
         System.out.println("Getting: " + myBookTitle);
+        Book myBookBinarySearched = books.binarySearch(0, books.size()-1, myBook, (a,b)->a.getTitle().compareTo(b.getTitle()));
+        String myBookBinarySearchTitle = myBookBinarySearched != null? "Book binary searched title: " + myBookBinarySearched.getTitle(): "Binary search returned empty";
 
         if(books.remove(myBook)) System.out.println("Book removed");
         if(books.remove(myBook)) System.out.println("Book removed");

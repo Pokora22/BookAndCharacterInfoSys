@@ -32,7 +32,6 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         addAll(sourceCollection);
     }
 
-
     public boolean add(T item){
         if (loadFactor() == 1) return false;
 
@@ -134,7 +133,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         int left = begin;
         int right = end;
         if(right>left) {
-            T pivot = list.get(list.size()/2);
+            T pivot = list.get(begin + (end - begin)/2);
             if(pivot == null) return list; //if pivot is null, list is empty - return empty as it's sorted
 
             while (left <= right) {
@@ -160,31 +159,23 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         list[right] = temp;
     }
 
-    /*
-    public T binarySearch(int left, int right, int searchItem, Comparator<T> comparator)
+    public T binarySearch(int left, int right, T searchItem, Comparator<T> comparator)
     {
-        T[] arr = new CustomHashList<T>(this).quickSort(0,size()-1,comparator);
+        CustomHashList<T> list = quickSort(this, 0,size()-1,comparator);
         if (right >= left) {
             int midIndex = left + (right - left) / 2;
 
-            if (arr[midIndex] == searchItem)
-                return midIndex;
+            if (list.get(midIndex).equals(searchItem))
+                return list.get(midIndex);
 
-            // If element is smaller than mid, then
-            // it can only be present in left subarray
-            if (arr[midIndex] > searchItem)
-                return binarySearch(arr, left, midIndex - 1, searchItem);
+            if (comparator.compare(list.get(midIndex), searchItem) < 0)
+                return binarySearch(left, midIndex-1, searchItem, comparator);
 
-            // Else the element can only be present
-            // in right subarray
-            return binarySearch(arr, midIndex + 1, right, searchItem);
+            return binarySearch(midIndex + 1, right, searchItem, comparator);
         }
 
-        // We reach here when element is not present
-        // in array
-        return -1;
+        return null; //TODO: Check if it causes problems/make sure to check for null when dealing with found object
     }
-    */
 
     public int size() {
         int size = 0;

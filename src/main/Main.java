@@ -10,11 +10,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import models.Book;
+import models.Library;
 
 import java.util.Comparator;
 import java.util.Random;
 
 public class Main extends Application {
+    public static Library library;
     static Random rndm = new Random();
 
     @Override
@@ -73,6 +75,7 @@ public class Main extends Application {
 
         for(Node n: sortedBooks) System.out.println(n.getContent());
 
+        library = new Library();
         launch(args);
     }
 

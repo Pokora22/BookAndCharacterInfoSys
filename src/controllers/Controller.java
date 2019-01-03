@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -42,5 +43,12 @@ public class Controller {
         Controller controller = loader.getController();
         controller.setSourceScene(sourceStage.getScene());
         sourceStage.setScene(new Scene(root));
+    }
+
+    protected void alert(String msg){
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Warning Dialog");
+        alert.setHeaderText(msg);
+        alert.showAndWait();
     }
 }

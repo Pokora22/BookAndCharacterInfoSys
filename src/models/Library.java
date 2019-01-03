@@ -38,14 +38,14 @@ public class Library {
 
 
     public void loadLibrary(){
-        if (!new File("src/data/bookings.xml").exists()) {
+        if (!new File("src/db/books.xml").exists()) {
             try {
                 saveBooks();
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
         }
-        if (!new File("src/data/menu.xml").exists()) {
+        if (!new File("src/db/characters.xml").exists()) {
             try {
                 saveCharacters();
             } catch (IOException e1) {

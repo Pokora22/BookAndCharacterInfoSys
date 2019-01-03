@@ -1,5 +1,4 @@
 import dataStructures.CustomHashList;
-import dataStructures.CustomLinkedList;
 import dataStructures.Node;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +8,6 @@ import javafx.stage.Stage;
 
 import models.Book;
 
-import java.util.Comparator;
 import java.util.Random;
 
 public class Main extends Application {
@@ -59,13 +57,14 @@ public class Main extends Application {
         }
 
 
-        System.out.println("Books list size: " + books.getList().length);
+        System.out.println("Books list size: " + books.getArray().length);
         System.out.println("Amount of books in: " + books.size());
         String myBookTitle = books.get(myBook) == null? "Book missing" : books.get(myBook).getTitle();
         System.out.println("Getting: " + myBookTitle);
-//        Book myBookBinarySearched = books.binarySearch(0, books.size()-1, myBook, (a,b)->a.getTitle().compareTo(b.getTitle()));
-//        String myBookBinarySearchTitle = myBookBinarySearched != null? "Book binary searched title: " + myBookBinarySearched.getTitle(): "Binary search returned empty";
-//        System.out.println(myBookBinarySearchTitle);
+
+        Book myBookBinarySearched = CustomHashList.binarySearch(books,0, books.size()-1, myBook, (a, b)->a.getTitle().compareTo(b.getTitle()));
+        String myBookBinarySearchTitle = myBookBinarySearched != null? "Book binary searched title: " + myBookBinarySearched.getTitle(): "Binary search returned empty";
+        System.out.println(myBookBinarySearchTitle);
 
         if(books.remove(myBook)) System.out.println("Book removed");
         else System.out.println("No such book");
@@ -73,9 +72,9 @@ public class Main extends Application {
 
 
         Node<Book>[] sortedBooks;
-//        sortedBooks = CustomHashList.quickSort(new CustomHashList<Book>(books), 0, books.size()-1, (a, b)->a.getTitle().compareTo(b.getTitle()));
+        sortedBooks = CustomHashList.quickSort(new CustomHashList<Book>(books), 0, books.size()-1, (a, b)->a.getTitle().compareTo(b.getTitle()));
 
-//        for(Node n: sortedBooks) System.out.println(n.getContent());
+        for(Node n: sortedBooks) System.out.println(n.getContent());
 
 //        System.out.println("\nUnsorted");
 //        for(Book b : books) System.out.println(b);

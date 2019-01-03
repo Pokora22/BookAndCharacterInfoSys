@@ -1,8 +1,5 @@
 package dataStructures;
 
-import jdk.nashorn.api.tree.LiteralTree;
-
-import javax.xml.stream.events.StartDocument;
 import java.util.*;
 
 public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
@@ -113,7 +110,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     private void expand(){ //Stuff breaks because of order added? Different head etc. Would need to replace this whole instance somehow
         CustomHashList<T> expandedList = new CustomHashList<>(size()*2);
         expandedList.addAll(this);
-        this.list = expandedList.getList();
+        this.list = expandedList.getArray();
     }
 
     public T get(T item){
@@ -128,10 +125,10 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         }*/
     }
 
-    public Node<T>[] toArray(){
-        Node<T>[] arr = new Node[size()];
+    public Node[] toArray(){
+        Node[] arr = new Node[size()];
 
-        Node<T> itemToAdd = head;
+        Node itemToAdd = head;
         for(int i = 0; i < arr.length; i++){
             arr[i] = itemToAdd;
             itemToAdd = itemToAdd.getNext();
@@ -141,27 +138,21 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
     }
 
     public static <T> Node[] quickSort(CustomHashList<T> list, int begin, int end, Comparator<T> comparator) {
-
-//        if(list.size() < list.getList().length) list = new CustomHashList<>(list); //remove null elements by creating exact size hash list?
-        Node<T>[] arr = list.toArray();
+        if(list.size() < list.getArray().length) list = new CustomHashList<>(list); //remove null elements by creating exact size hash list?
 
         int left = begin;
         int right = end;
         if(right>left) {
-            T pivot = arr[begin + (end - begin)/2].getContent();
+            T pivot = list.get(begin + (end - begin)/2);
             if(pivot == null) return null; //if pivot is null, list is empty
 
             while (left <= right) {
-                while (left < end && comparator.compare(arr[left].getContent(), pivot) < 0) left++;
-                while (right > begin && comparator.compare(arr[right].getContent(), pivot) > 0) right--;
+                while (left < end && comparator.compare(list.get(left), pivot) < 0) left++;
+                while (right > begin && comparator.compare(list.get(right), pivot) > 0) right--;
 
                 if(left <= right)
                 {
-//                    list.swap(left, right);
-                    Node<T> temp = arr[left];
-                    arr[left] = arr[right];
-                    arr[right] = temp;
-
+                    list.swap(left, right);
                     left++;
                     right--;
                 }
@@ -170,18 +161,34 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
             }
         }
 
-        return arr;
+        return list.getArray();
     }
 
-//    private void swap(int left, int right) {
-//        Node temp = list[left];
-//        list[left] = list[right];
-//        list[right] = temp;
-//    }
+    private void swap(int left, int right) {
+        Node temp = list[left];
+        list[left] = list[right];
+        list[right] = temp;
+    }
 
-    public T binarySearch(int left, int right, T searchItem, Comparator<T> comparator)
+    /**
+     * Helper method for binary search. Sorts the given list before passing it to search function. Returns the binarySearch result.
+     */
+    public static <T> T binarySearch(CustomHashList<T> list, int left, int right, T searchItem, Comparator<T> comparator){
+        Node<T>[] arr = quickSort(list, 0,list.size()-1, comparator);
+
+        return binarySearch(arr, left, right, searchItem, comparator);
+    }
+    /**
+     * Performs a binary search for the item passed as argument and returns it. Requires an already sorted Node array.
+     * @param arr Presorted array of items to search through.
+     * @param left Leftmost index where search should start.
+     * @param right rightmost index where search should end.
+     * @param searchItem Item being searched for.
+     * @param comparator Indicates the method to sort/search by.
+     * @return Requested item or null if the item doesn't exist in the array.
+     */
+    private static  <T> T binarySearch(Node<T>[] arr, int left, int right, T searchItem, Comparator<T> comparator)
     {
-        Node<T>[] arr = quickSort(this, 0,size()-1,comparator);
         if (right >= left) {
             int midIndex = left + (right - left) / 2;
 
@@ -189,9 +196,9 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
                 return arr[midIndex].getContent();
 
             if (comparator.compare(arr[midIndex].getContent(), searchItem) < 0)
-                return binarySearch(left, midIndex-1, searchItem, comparator);
+                return binarySearch(arr, left, midIndex-1, searchItem, comparator);
 
-            return binarySearch(midIndex + 1, right, searchItem, comparator);
+            return binarySearch(arr, midIndex + 1, right, searchItem, comparator);
         }
 
         return null; //TODO: Check if it causes problems/make sure to check for null when dealing with found object
@@ -229,11 +236,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
         return toString.toString();
     }
 
-    public Node<T> getHead() {
-        return head;
-    }
-
-    public Node<T>[] getList() {
+    public Node<T>[] getArray() {
         return list;
     }
 }

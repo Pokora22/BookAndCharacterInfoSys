@@ -14,13 +14,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import models.Book;
-import models.Library;
+import static main.Main.library;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class BookListController extends Controller implements Initializable {
+public class BookListController extends Controller {
 
     @FXML
     private BorderPane window;
@@ -55,31 +56,17 @@ public class BookListController extends Controller implements Initializable {
     }
 
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //set up the columns into the table
-        table = new TableView<>();
-
-        table.getColumns().add(title);
-        table.getColumns().add(author);
+    @FXML
+    private void initialize() {
+        System.out.println(table.toString());
+        table.getItems().clear();
+        table.getItems().addAll(library.getBooks());
 
         title.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getTitle()));
         author.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getAuthor()));
-
-        table.getItems().addAll(getBooks());
-        System.out.println("and here");
-    }
-
-
-    //dummy to see if tableview FINALLY works...
-    public ObservableList<Book> getBooks() {
-        ObservableList<Book> books = FXCollections.observableArrayList();
-        books.add(new Book("a","b","c","d","e","f", 123, 1,2));
-        books.add(new Book("asddsa","asdff","fff","dsasdf","ezxvc","fr", 12333, 14,211));
-        System.out.println("im here");
-        return books;
+        System.out.println(table.getItems());
     }
 
     public void setList() { //updates the list

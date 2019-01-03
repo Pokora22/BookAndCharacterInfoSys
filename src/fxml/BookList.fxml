@@ -26,7 +26,7 @@
       </Pane>
    </top>
    <center>
-      <TableView fx:id="list" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="title" prefWidth="299.0" text="Title" />
           <TableColumn fx:id="author" prefWidth="299.0" text="Author" />

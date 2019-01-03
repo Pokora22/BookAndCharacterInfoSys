@@ -11,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import models.Book;
+import models.Library;
 
 import java.io.IOException;
 
@@ -28,15 +30,11 @@ public class MainController extends Controller {
     @FXML
     private void openBooks(ActionEvent actionEvent) throws IOException { //opens the book list
         changeScene(actionEvent, "../fxml/BookList.fxml");
-//        setSourceScene(sourceScene);
-//        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/BookList.fxml")));
     }
 
     @FXML
     private void openCharacters(ActionEvent actionEvent) throws IOException { //opens the character list
         changeScene(actionEvent, "../fxml/BookCharacterList.fxml");
-//        setSourceScene(sourceScene);
-//        window.getScene().setRoot(FXMLLoader.load(getClass().getResource("../fxml/BookCharacterList.fxml")));
 
     }
 

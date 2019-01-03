@@ -31,7 +31,7 @@ public class Controller {
     protected void goBack(ActionEvent actionEvent){
         Stage sourceStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
 
-        sourceStage.setTitle("Restaurant Management");
+        sourceStage.setTitle("Library Management");
         sourceStage.setScene(sourceScene);
     }
 

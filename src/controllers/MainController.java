@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import static main.Main.library;
 import models.Book;
 import models.Library;
 
@@ -18,6 +19,7 @@ import java.io.IOException;
 
 
 public class MainController extends Controller {
+
 
     @FXML
     private TextField searchField;
@@ -42,6 +44,13 @@ public class MainController extends Controller {
     private void search(){ //takes the searched input and lists both books and characters
 
 
+    }
+
+    @FXML
+    private void deleteDatabase() {
+        library.getCharacters().clear();
+        library.getBooks().clear();
+        System.out.println("size now"+library.getCharacters().size());
     }
 
 

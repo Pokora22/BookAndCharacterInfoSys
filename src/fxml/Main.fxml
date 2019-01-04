@@ -20,6 +20,7 @@
             <Button layoutX="358.0" layoutY="160.0" mnemonicParsing="false" onAction="#openCharacters" prefHeight="80.0" prefWidth="156.0" style="-fx-font-size: 25; -fx-background-color: #399;" text="Characters" />
             <TextField fx:id="searchField" layoutX="156.0" layoutY="306.0" prefHeight="27.0" prefWidth="220.0" style="-fx-border-color: #000; -fx-background-color: #fff;" />
             <Button layoutX="376.0" layoutY="306.0" mnemonicParsing="false" onAction="#search" prefHeight="27.0" prefWidth="60.0" style="-fx-font-size: 11;" text="Search" />
+            <Button layoutX="274.0" layoutY="80.0" mnemonicParsing="false" onAction="#deleteDatabase" text="deleteDB" />
          </children>
       </Pane>
    </center>

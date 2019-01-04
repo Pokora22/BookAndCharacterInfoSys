@@ -42,11 +42,16 @@ public class BookListController extends Controller {
     @FXML
     private void delete() { //if item selected, delete it
 
+        if(table.getSelectionModel().getSelectedItem()!=null) {
+            library.getBooks().remove(table.getSelectionModel().getSelectedItem());
+        }
+        initialize();
     }
 
     @FXML
     private void view() {   //if item selected, view it
                             //(that window will allow editing)
+        initialize();
     }
 
     @FXML
@@ -58,7 +63,6 @@ public class BookListController extends Controller {
 
     @FXML
     private void initialize() {
-        System.out.println(table.toString());
         table.getItems().clear();
         table.getItems().addAll(library.getBooks());
 
@@ -66,7 +70,6 @@ public class BookListController extends Controller {
                 new SimpleStringProperty(cellData.getValue().getTitle()));
         author.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getAuthor()));
-        System.out.println(table.getItems());
     }
 
     public void setList() { //updates the list

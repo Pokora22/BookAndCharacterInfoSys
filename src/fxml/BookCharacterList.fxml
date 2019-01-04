@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -17,9 +18,6 @@
          </children>
       </Pane>
    </bottom>
-   <center>
-      <ListView fx:id="list" prefHeight="160.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </center>
    <top>
       <Pane prefHeight="29.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,4 +25,12 @@
          </children>
       </Pane>
    </top>
+   <center>
+      <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+          <TableColumn fx:id="fName" prefWidth="300.0" text="First Name" />
+          <TableColumn fx:id="sName" prefWidth="299.0" text="Surname" />
+        </columns>
+      </TableView>
+   </center>
 </BorderPane>

@@ -91,6 +91,7 @@ public class CustomHashList<T> extends AbstractList<T> implements Iterable<T>{
 
     public boolean remove(Object item) {
         int index = getIndex(item);
+        if(head.equals(list[index])) head = head.getNext();
         if (index < 0) return false;
 
         Node<T> prevNode, nextNode; //Hold the references temporarily - otherwise would come up null after overwriting first one.
